@@ -10,9 +10,9 @@ Item {
     ShortcutHandler {
         id: focusNext;
 
-        name: "KrohnkiteFocusNext";
-        text: "Krohnkite: Focus Next";
-        sequence: "Meta+.";
+        name: "ForkniteFocusNext";
+        text: "Forknite: Focus Next";
+        sequence: "";
     }
     function getFocusPrev() {
         return focusPrev;
@@ -20,9 +20,9 @@ Item {
     ShortcutHandler {
         id: focusPrev;
 
-        name: "KrohnkiteFocusPrev";
-        text: "Krohnkite: Focus Previous";
-        sequence: "Meta+,";
+        name: "ForkniteFocusPrev";
+        text: "Forknite: Focus Previous";
+        sequence: "";
     }
 
     function getFocusDown() {
@@ -31,8 +31,8 @@ Item {
     ShortcutHandler {
         id: focusDown;
 
-        name: "KrohnkiteFocusDown";
-        text: "Krohnkite: Focus Down";
+        name: "ForkniteFocusDown";
+        text: "Forknite: Focus Down";
         sequence: "Meta+J";
     }
     function getFocusUp() {
@@ -41,8 +41,8 @@ Item {
     ShortcutHandler {
         id: focusUp;
 
-        name: "KrohnkiteFocusUp";
-        text: "Krohnkite: Focus Up";
+        name: "ForkniteFocusUp";
+        text: "Forknite: Focus Up";
         sequence: "Meta+K";
     }
     function getFocusLeft() {
@@ -51,8 +51,8 @@ Item {
     ShortcutHandler {
         id: focusLeft;
 
-        name: "KrohnkiteFocusLeft";
-        text: "Krohnkite: Focus Left";
+        name: "ForkniteFocusLeft";
+        text: "Forknite: Focus Left";
         sequence: "Meta+H";
     }
     function getFocusRight() {
@@ -61,8 +61,8 @@ Item {
     ShortcutHandler {
         id: focusRight;
 
-        name: "KrohnkiteFocusRight";
-        text: "Krohnkite: Focus Right";
+        name: "ForkniteFocusRight";
+        text: "Forknite: Focus Right";
         sequence: "Meta+L";
     }
     function getShiftDown() {
@@ -71,8 +71,8 @@ Item {
     ShortcutHandler {
         id: shiftDown;
 
-        name: "KrohnkiteShiftDown";
-        text: "Krohnkite: Move Down/Next";
+        name: "ForkniteShiftDown";
+        text: "Forknite: Move Down/Next";
         sequence: "Meta+Shift+J";
     }
     function getShiftUp() {
@@ -81,8 +81,8 @@ Item {
     ShortcutHandler {
         id: shiftUp;
 
-        name: "KrohnkiteShiftUp";
-        text: "Krohnkite: Move Up/Prev";
+        name: "ForkniteShiftUp";
+        text: "Forknite: Move Up/Prev";
         sequence: "Meta+Shift+K";
     }
     function getShiftLeft() {
@@ -91,8 +91,8 @@ Item {
     ShortcutHandler {
         id: shiftLeft;
 
-        name: "KrohnkiteShiftLeft";
-        text: "Krohnkite: Move Left";
+        name: "ForkniteShiftLeft";
+        text: "Forknite: Move Left";
         sequence: "Meta+Shift+H";
     }
     function getShiftRight() {
@@ -101,8 +101,8 @@ Item {
     ShortcutHandler {
         id: shiftRight;
 
-        name: "KrohnkiteShiftRight";
-        text: "Krohnkite: Move Right";
+        name: "ForkniteShiftRight";
+        text: "Forknite: Move Right";
         sequence: "Meta+Shift+L";
     }
     function getGrowHeight() {
@@ -111,9 +111,9 @@ Item {
     ShortcutHandler {
         id: growHeight;
 
-        name: "KrohnkiteGrowHeight";
-        text: "Krohnkite: Grow Height";
-        sequence: "Meta+Ctrl+J";
+        name: "ForkniteGrowHeight";
+        text: "Forknite: Grow Height";
+        sequence: "Meta+Alt+J";
     }
     function getShrinkHeight() {
         return shrinkHeight;
@@ -121,9 +121,9 @@ Item {
     ShortcutHandler {
         id: shrinkHeight;
 
-        name: "KrohnkiteShrinkHeight";
-        text: "Krohnkite: Shrink Height";
-        sequence: "Meta+Ctrl+K";
+        name: "ForkniteShrinkHeight";
+        text: "Forknite: Shrink Height";
+        sequence: "Meta+Alt+K";
     }
     function getShrinkWidth() {
         return shrinkWidth;
@@ -131,9 +131,9 @@ Item {
     ShortcutHandler {
         id: shrinkWidth;
 
-        name: "KrohnkiteShrinkWidth";
-        text: "Krohnkite: Shrink Width";
-        sequence: "Meta+Ctrl+H";
+        name: "ForkniteShrinkWidth";
+        text: "Forknite: Shrink Width";
+        sequence: "Meta+Alt+H";
     }
     function getGrowWidth() {
         return growWidth;
@@ -141,9 +141,9 @@ Item {
     ShortcutHandler {
         id: growWidth;
 
-        name: "KrohnkitegrowWidth";
-        text: "Krohnkite: Grow Width";
-        sequence: "Meta+Ctrl+L";
+        name: "ForknitegrowWidth";
+        text: "Forknite: Grow Width";
+        sequence: "Meta+Alt+L";
     }
     function getIncrease() {
         return increase;
@@ -151,9 +151,9 @@ Item {
     ShortcutHandler {
         id: increase;
 
-        name: "KrohnkiteIncrease";
-        text: "Krohnkite: Increase";
-        sequence: "Meta+I";
+        name: "ForkniteIncrease";
+        text: "Forknite: Increase";
+        sequence: "Meta+Alt+=";
     }
     function getDecrease() {
         return decrease;
@@ -161,9 +161,9 @@ Item {
     ShortcutHandler {
         id: decrease;
 
-        name: "KrohnkiteDecrease";
-        text: "Krohnkite: Decrease";
-        sequence: "Meta+D";
+        name: "ForkniteDecrease";
+        text: "Forknite: Decrease";
+        sequence: "Meta+Alt+-";
     }
     function getToggleFloat() {
         return toggleFloat;
@@ -171,9 +171,9 @@ Item {
     ShortcutHandler {
         id: toggleFloat;
 
-        name: "KrohnkiteToggleFloat";
-        text: "Krohnkite: Toggle Float";
-        sequence: "Meta+F";
+        name: "ForkniteToggleFloat";
+        text: "Forknite: Toggle Float";
+        sequence: "Meta+Alt+F";
     }
     function getFloatAll() {
         return floatAll;
@@ -181,9 +181,9 @@ Item {
     ShortcutHandler {
         id: floatAll;
 
-        name: "KrohnkiteFloatAll";
-        text: "Krohnkite: Toggle Float All";
-        sequence: "Meta+Shift+F";
+        name: "ForkniteFloatAll";
+        text: "Forknite: Toggle Float All";
+        sequence: "";
     }
     function getNextLayout() {
         return nextLayout;
@@ -191,9 +191,9 @@ Item {
     ShortcutHandler {
         id: nextLayout;
 
-        name: "KrohnkiteNextLayout";
-        text: "Krohnkite: Next Layout";
-        sequence: "Meta+\\";
+        name: "ForkniteNextLayout";
+        text: "Forknite: Next Layout";
+        sequence: "Meta+Space";
     }
     function getPreviousLayout() {
         return previousLayout;
@@ -201,9 +201,9 @@ Item {
     ShortcutHandler {
         id: previousLayout;
 
-        name: "KrohnkitePreviousLayout";
-        text: "Krohnkite: Previous Layout";
-        sequence: "Meta+|";
+        name: "ForknitePreviousLayout";
+        text: "Forknite: Previous Layout";
+        sequence: "Meta+Shift+Space";
     }
     function getRotate() {
         return rotate;
@@ -211,8 +211,8 @@ Item {
     ShortcutHandler {
         id: rotate;
 
-        name: "KrohnkiteRotate";
-        text: "Krohnkite: Rotate";
+        name: "ForkniteRotate";
+        text: "Forknite: Rotate";
         sequence: "Meta+R";
     }
     function getRotatePart() {
@@ -221,8 +221,8 @@ Item {
     ShortcutHandler {
         id: rotatePart;
 
-        name: "KrohnkiteRotatePart";
-        text: "Krohnkite: Rotate Part";
+        name: "ForkniteRotatePart";
+        text: "Forknite: Rotate Part";
         sequence: "Meta+Shift+R";
     }
     function getSetMaster() {
@@ -231,9 +231,9 @@ Item {
     ShortcutHandler {
         id: setMaster;
 
-        name: "KrohnkiteSetMaster";
-        text: "Krohnkite: Set master";
-        sequence: "Meta+Return";
+        name: "ForkniteSetMaster";
+        text: "Forknite: Set master";
+        sequence: "";
     }
     function getTileLayout() {
         return tileLayout;
@@ -241,8 +241,8 @@ Item {
     ShortcutHandler {
         id: tileLayout;
 
-        name: "KrohnkiteTileLayout";
-        text: "Krohnkite: Tile Layout";
+        name: "ForkniteTileLayout";
+        text: "Forknite: Tile Layout";
         sequence: "Meta+T";
     }
     function getMonocleLayout() {
@@ -251,8 +251,8 @@ Item {
     ShortcutHandler {
         id: monocleLayout;
 
-        name: "KrohnkiteMonocleLayout";
-        text: "Krohnkite: Monocle Layout";
+        name: "ForkniteMonocleLayout";
+        text: "Forknite: Monocle Layout";
         sequence: "Meta+M";
     }
     function getThreeColumnLayout() {
@@ -261,8 +261,8 @@ Item {
     ShortcutHandler {
         id: treeColumnLayout;
 
-        name: "KrohnkiteTreeColumnLayout";
-        text: "Krohnkite: Tree Column Layout";
+        name: "ForkniteTreeColumnLayout";
+        text: "Forknite: Tree Column Layout";
         sequence: "";
     }
     function getSpreadLayout() {
@@ -271,8 +271,8 @@ Item {
     ShortcutHandler {
         id: spreadLayout;
 
-        name: "KrohnkiteSpreadLayout";
-        text: "Krohnkite: Spread Layout";
+        name: "ForkniteSpreadLayout";
+        text: "Forknite: Spread Layout";
         sequence: "";
     }
     function getStairLayout() {
@@ -281,8 +281,8 @@ Item {
     ShortcutHandler {
         id: stairLayout;
 
-        name: "KrohnkiteStairLayout";
-        text: "Krohnkite: Stair Layout";
+        name: "ForkniteStairLayout";
+        text: "Forknite: Stair Layout";
         sequence: "";
     }
     function getFloatingLayout() {
@@ -291,8 +291,8 @@ Item {
     ShortcutHandler {
         id: floatingLayout;
 
-        name: "KrohnkiteFloatingLayout";
-        text: "Krohnkite: Floating Layout";
+        name: "ForkniteFloatingLayout";
+        text: "Forknite: Floating Layout";
         sequence: "";
     }
     function getQuarterLayout() {
@@ -301,8 +301,8 @@ Item {
     ShortcutHandler {
         id: quarterLayout;
 
-        name: "KrohnkiteQuarterLayout";
-        text: "Krohnkite: Quarter Layout";
+        name: "ForkniteQuarterLayout";
+        text: "Forknite: Quarter Layout";
         sequence: "";
     }
     function getStackedLayout() {
@@ -311,8 +311,8 @@ Item {
     ShortcutHandler {
         id: stackedLayout;
 
-        name: "KrohnkiteStackedLayout";
-        text: "Krohnkite: Stacked Layout";
+        name: "ForkniteStackedLayout";
+        text: "Forknite: Stacked Layout";
         sequence: "";
     }
     function getBTreeLayout() {
@@ -321,8 +321,8 @@ Item {
     ShortcutHandler {
         id: bTreeLayout;
 
-        name: "KrohnkiteBTreeLayout";
-        text: "Krohnkite: BTree Layout";
+        name: "ForkniteBTreeLayout";
+        text: "Forknite: BTree Layout";
         sequence: "";
     }
     function getSpiralLayout() {
@@ -331,8 +331,8 @@ Item {
     ShortcutHandler {
         id: spiralLayout;
 
-        name: "KrohnkiteSpiralLayout";
-        text: "Krohnkite: Spiral Layout";
+        name: "ForkniteSpiralLayout";
+        text: "Forknite: Spiral Layout";
         sequence: "";
     }
 }

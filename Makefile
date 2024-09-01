@@ -1,4 +1,4 @@
-PROJECT_NAME = krohnkite
+PROJECT_NAME = forknite
 PROJECT_VER  = 0.9.7
 PROJECT_REV  = $(shell git rev-parse HEAD | cut -b-7)
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>KrohnkiteConfigForm</class>
- <widget class="QWidget" name="KrohnkiteConfigForm">
+ <class>ForkniteConfigForm</class>
+ <widget class="QWidget" name="ForkniteConfigForm">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -649,14 +649,9 @@
             <property name="minimumSize">
              <size>
               <width>400</width>
-              <height>0</height>
+              <height>At existing position</height>
              </size>
             </property>
-            <item>
-             <property name="text">
-              <string>Last</string>
-             </property>
-            </item>
             <item>
              <property name="text">
               <string>First</string>
@@ -665,6 +660,11 @@
             <item>
              <property name="text">
               <string>Second</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Last</string>
              </property>
             </item>
            </widget>
@@ -836,7 +836,7 @@
           <item row="0" column="1">
            <widget class="QLineEdit" name="kcfg_screenDefaultLayout">
             <property name="toolTip">
-             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Comma-separated list OutputName:LayoutNumber all values you will see if run KSystemLog and type krohnkite in filter string. The data will right under Krohenkite start string.&lt;/p&gt;&lt;p&gt;2 monitors example: HDMI-A-1:3,DP-2:1&lt;/p&gt;&lt;p&gt;Example with desktop name: HDMI-A-1:Desktop 1:1,HDMI-A-1:Desktop 2:3&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Comma-separated list OutputName:LayoutNumber all values you will see if run KSystemLog and type forknite in filter string. The data will right under Forknite start string.&lt;/p&gt;&lt;p&gt;2 monitors example: HDMI-A-1:3,DP-2:1&lt;/p&gt;&lt;p&gt;Example with desktop name: HDMI-A-1:Desktop 1:1,HDMI-A-1:Desktop 2:3&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
            </widget>
           </item>
@@ -957,7 +957,7 @@
        <item>
         <widget class="QCheckBox" name="kcfg_debugActiveWin">
          <property name="toolTip">
-          <string>Print debug output all new windows with params. In Kdevelop write krohnkite in filter.</string>
+          <string>Print debug output all new windows with params. In Kdevelop write forknite in filter.</string>
          </property>
          <property name="text">
           <string>Debug new Windows</string>

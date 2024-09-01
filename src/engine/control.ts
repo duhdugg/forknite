@@ -26,10 +26,12 @@
  */
 
 class TilingController {
+  public lastFocused: WindowClass | null;
   private engine: TilingEngine;
 
   public constructor(engine: TilingEngine) {
     this.engine = engine;
+    this.lastFocused = null;
   }
 
   public onSurfaceUpdate(ctx: IDriverContext, comment: string): void {
@@ -178,6 +180,7 @@ class TilingController {
 
   public onWindowFocused(ctx: IDriverContext, window: WindowClass) {
     window.timestamp = new Date().getTime();
+    this.lastFocused = window;
   }
 
   public onShortcut(ctx: IDriverContext, input: Shortcut, data?: any) {

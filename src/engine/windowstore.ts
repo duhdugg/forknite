@@ -1,4 +1,5 @@
 // Copyright (c) 2018-2019 Eon S. Jeon <esjeon@hyunmu.am>
+// Copyright (c) 2024 Doug Elkin <doug@dougelkin.com>
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
 // copy of this software and associated documentation files (the "Software"),
@@ -69,6 +70,19 @@ class WindowStore {
 
   public beside_first(window: WindowClass) {
     this.list.splice(1, 0, window);
+  }
+
+  public relative_state(window: WindowClass) {
+    this.list.splice(this.getLastFocusedIndex(window), 0, window);
+  }
+
+  public getLastFocusedIndex(window: WindowClass): number {
+    const lastFocused = window.driver.control.lastFocused;
+    if (lastFocused === null) {
+      return 0;
+    }
+    const idx = this.indexOf(lastFocused);
+    return idx >= 0 ? idx : 0;
   }
 
   public remove(window: WindowClass) {

@@ -49,7 +49,7 @@ Item {
     }
 
     Component.onCompleted: {
-        console.log("KROHNKITE: starting the script");
+        console.log("FORKNITE: starting the script");
         const api = {
             "workspace": Workspace,
             // "options": Options,

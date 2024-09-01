@@ -1,8 +1,8 @@
 {
-  "name": "krohnkite",
+  "name": "forknite",
   "version": "0.9.7",
-  "description": "A dynamic tiling extension for KWin",
-  "main": "krohnkite.js",
+  "description": "A fork of a fork of a dynamic tiling extension for Plasma 6 Wayland sessions",
+  "main": "forknite.js",
   "directories": {
     "test": "test"
   },
@@ -16,12 +16,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/anametologin/krohnkite"
+    "url": "git+https://github.com/duhdugg/forknite"
   },
-  "author": "Eon S. Jeon <esjeon@hyunmu.am>",
+  "author": "Doug Elkin <doug@dougelkin.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/anametologin/krohnkite/issues"
+    "url": "https://github.com/duhdugg/forknite/issues"
   },
-  "homepage": "https://github.com/anametologin/krohnkite#readme"
+  "homepage": "https://github.com/duhdugg/forknite#readme"
 }

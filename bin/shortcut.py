@@ -14,7 +14,7 @@ import dbus
 # TODO: manually syncing key bindings? sucks!
 #       split this into a data file, which then can be translated into
 #       typescript code or included in other places.
-KROHNKITE_DEFAULT_BINDINGS = [
+FORKNITE_DEFAULT_BINDINGS = [
     ("Down/Next"     , "j"      ),
     ("Up/Prev"       , "k"      ),
     ("Left"          , "h"      ),
@@ -53,7 +53,7 @@ VERBOSE = True
 def parse_arguments() -> argparse.Namespace:
     # common arguments
     parser = argparse.ArgumentParser(
-        description='A helper script for managing Krohnkite shortcuts')
+        description='A helper script for managing Forknite shortcuts')
     parser.add_argument('--quiet', '-q', action='store_true',
         help='Suppress output')
 
@@ -64,7 +64,7 @@ def parse_arguments() -> argparse.Namespace:
     # register command
     #
     parser_register = subparsers.add_parser('register',
-        help='Register Krohnkite-related shortcuts')
+        help='Register Forknite-related shortcuts')
     parser_register.add_argument('--bind', '-b', action='append', dest='binds',
         metavar='ACTION=KEY', type=str,
         help='''Use a different key for specified action. The final result is MOD+KEY = ACTION.
@@ -79,7 +79,7 @@ def parse_arguments() -> argparse.Namespace:
     # unregister command
     #
     parser_unregister = subparsers.add_parser('unregister',
-        help='''Remove all Krohnkite shortcuts from KWin.
+        help='''Remove all Forknite shortcuts from KWin.
         This doesn't reset other key bindings changed by this script.''')
 
     #
@@ -119,16 +119,16 @@ def register_shortcut(action_id, keycomb, force=False):
         print(f"register [{keycomb:<14}] to '{action_id[2]}/{action_id[1]}'.")
     kglobalaccel.setForeignShortcut(action_id, [keycode])
 
-def register_krohnkite_shortcut(action: str, keycomb_full: str):
-    action = f"Krohnkite: {action}"
+def register_forknite_shortcut(action: str, keycomb_full: str):
+    action = f"Forknite: {action}"
     keycode = get_keycode(keycomb_full)
 
     if VERBOSE: print(f"register [{keycomb_full:<14}] to '{action}'.")
 
     kglobalaccel.setForeignShortcut(["kwin", action, "KWin", ""], [keycode])
 
-def unregister_krohnkite_shortcut(action: str):
-    action = f"Krohnkite: {action}"
+def unregister_forknite_shortcut(action: str):
+    action = f"Forknite: {action}"
 
     if VERBOSE: print(f"unregister '{action}'.")
 
@@ -144,11 +144,11 @@ def unregister_colliding_shortcut(keycomb_full: str):
         if VERBOSE: print(f"unregister [{keycomb_full:<14}] bound to '{action_id[1]}'")
         kglobalaccel.setForeignShortcut(action_id, [])
 
-def unregister_all_krohnkite_shortcuts():
+def unregister_all_forknite_shortcuts():
     names = [
         str(name) for name
         in kwin_component.shortcutNames()
-        if name.startswith('Krohnkite:')
+        if name.startswith('Forknite:')
     ]
 
     for name in names:
@@ -176,7 +176,7 @@ def main():
     VERBOSE = not config.quiet
 
     if config.command == 'register':
-        binds = dict(KROHNKITE_DEFAULT_BINDINGS)
+        binds = dict(FORKNITE_DEFAULT_BINDINGS)
 
         if config.binds is not None:
             # parse ACTION=KEY parameter
@@ -203,16 +203,16 @@ def main():
         # register shortcuts
         for action, keycomb in binds.items():
             if keycomb is None:
-                unregister_krohnkite_shortcut(action)
+                unregister_forknite_shortcut(action)
             else:
                 keycomb_full = f'{config.modifier}+{keycomb}'
                 if is_shortcut_colliding(keycomb):
                     print(f"skipping {keycomb_full} due to shortcut collision...")
                 else:
-                    register_krohnkite_shortcut(action, keycomb_full)
+                    register_forknite_shortcut(action, keycomb_full)
 
     elif config.command == 'unregister':
-        unregister_all_krohnkite_shortcuts()
+        unregister_all_forknite_shortcuts()
     elif config.command == 'register-desktops':
         register_desktop_shortcuts(config.modifier, config.force)
 

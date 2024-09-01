@@ -1,15 +1,17 @@
-# Kröhnkite
+# Forknite
 
-A dynamic tiling extension for KWin 6.
+A fork of a fork of a dynamic tiling extension for Plasma 6 Wayland.
 
-Kröhnkite is mainly inspired by [dwm][] from suckless folks, and aims to
-provide rock solid stability while fully integrating into KWin.
+Forknite is a fork of a fork of Kröhnkite, which is "mainly inspired by [dwm][] from
+suckless folks, and aims to provide rock solid stability while fully integrating into
+KWin". Anyway, user aneametologin put a lot of work in his fork which made it work on
+Plasma 6 Wayland sessins. I think I just want to start with that and make it work a
+little more like my old bspwm configuration.
 
-The name of the script is from mineral [Kröhnkite][wikipedia]; it starts with
-K and looks cool.
 
+[anametologin fork which works on plasma 6](https://github.com/anametologin/krohnkite)
+[original krohnkite repo](https://github.com/esjeon/krohnkite)
 [dwm]: https://dwm.suckless.org/
-[wikipedia]: https://en.wikipedia.org/wiki/Kr%C3%B6hnkite
 
 ![screenshot](img/screenshot.png)
 
@@ -50,11 +52,11 @@ xwaylandvideobridge,plasmashell,ksplashqml
 
 ## Installation
 
-You can install Kröhnkite in multiple ways.
+You can install Forknite in multiple ways.
 
 ### Using .kwinscript package file
 
-You can download `krohnkite-x.x.kwinscript` file, and install it through
+You can download `forknite-x.x.kwinscript` file, and install it through
 _System Settings_.
 
 1.  Download the kwinscript file
@@ -64,13 +66,13 @@ _System Settings_.
 
 Alternatively, through command-line:
 
-    kpackagetool6 -t KWin/Script -i krohnkite.kwinscript # installing new script
-    kpackagetool6 -t kwin/script -u krohnkite.kwinscript # upgrading existing script
+    kpackagetool6 -t KWin/Script -i forknite.kwinscript # installing new script
+    kpackagetool6 -t kwin/script -u forknite.kwinscript # upgrading existing script
 
 To uninstall the package:
 
 ```
-kpackagetool6 -t kwin/script -r krohnkite
+kpackagetool6 -t kwin/script -r forknite
 ```
 
 ### Installing from Git repository
@@ -90,12 +92,12 @@ The generated package file can be imported from "KWin Script" dialog.
 
 ### Simply Trying Out
 
-Krohnkite can be temporarily loaded without installing the script:
+Forknite can be temporarily loaded without installing the script:
 
     make run
     make stop
 
-Note that Krohnkite can destroy itself completely once it is disabled, so no
+Note that Forknite can destroy itself completely once it is disabled, so no
 restart is required to deactivated it.
 
 ## Settings
@@ -104,24 +106,24 @@ restart is required to deactivated it.
 
 1. Right after system boot run KSystemLog
 2. Push ignore button
-3. Type in filter string: `krohnkite`
-4. Right after `KROHNKITE: starting the script` string you can see one if you have one screen or multiple strings: Screen(output):SCREEN_NAME numbered layouts...
+3. Type in filter string: `forknite`
+4. Right after `FORKNITE
 5. Copy your screen name. This name usually your video port DP-2 or HDMI-A-1 or Virtual-1 for VM or something like that
-6. Open Krohnkite options: ![options](img/conf.png)
+6. Open Forknite options: ![options](img/conf.png)
 7. Tab `Rules->Screen default layout` and type `YOUR_SCREEN_NAME:LAYOUT_ID` for example: `HDMI-A-1:2,DP-2:7`, or if you have multiple `Virtual Desktop` on screen you can write `SCREEN_NAME:DESKTOP_NAME:LAYOUT_ID`. More examples: `:2` - makes layout#2 default on all screens, `:Desktop 1:2` - makes layout#2 default on all desktops with name `Desktop 1`
 8. `Apply` -> `reboot`
 
-[Video: assign default layer for screen](https://github.com/anametologin/krohnkite/assets/165245883/f569f1de-1721-4cdf-b3fb-96782a3e3189)
+[Video: assign default layer for screen](https://github.com/anametologin/forknite/assets/165245883/f569f1de-1721-4cdf-b3fb-96782a3e3189)
 
 ### Search a window parameters to filter, float etc.
 
-1. Krohnkite options: ![options](img/conf.png)
+1. Forknite options: ![options](img/conf.png)
 2. Options->Debug new Windows
 3. Reboot
 4. Run KSystemLog
 5. Push `Ignore` button
-6. Type in filter string: `krohnkite`
-7. All created windows krohnkite working with will be there.
+6. Type in filter string: `forknite`
+7. All created windows forknite working with will be there.
 8. Every debug entry contains parameters except those that are false and empty.
 
 ## Default Key Bindings
@@ -157,7 +159,7 @@ restart is required to deactivated it.
 
 ### Setting Up for Multi-Screen
 
-Krohnkite supports multi-screen setup, but KWin has to be configured to unlock
+Forknite supports multi-screen setup, but KWin has to be configured to unlock
 the full potential of the script.
 
 1. Enable `Separate Screen Focus` feature:
@@ -196,8 +198,8 @@ convinient if title bars are removed.
 1. You can use the Oxygen decoration theme. [Oxygen theme settings][]
 1. You can install third-party decorations, see [Border color conversation][]
 
-[Oxygen theme settings]: https://github.com/anametologin/krohnkite/assets/165245883/51b4cb48-33c7-4627-a119-33d1abbe2b99
-[Border color conversation]: https://github.com/anametologin/krohnkite/issues/15
+[Oxygen theme settings]: https://github.com/anametologin/forknite/assets/165245883/51b4cb48-33c7-4627-a119-33d1abbe2b99
+[Border color conversation]: https://github.com/anametologin/forknite/issues/15
 
 ### Setting Minimum Geometry Size
 

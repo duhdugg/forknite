@@ -1,8 +1,8 @@
 {
   "KPackageStructure": "KWin/Script",
   "KPlugin": {
-    "Name": "Krohnkite",
-    "Description": "A dynamic tiling script for KWin ($REV)",
+    "Name": "Forknite",
+    "Description": "A fork of a fork of a dynamic tiling script for Plasma 6 ($REV)",
     "Icon": "dialog-tile-clones",
 
     "Authors": [
@@ -11,10 +11,10 @@
         "Name": "Eon S. Jeon"
       }
     ],
-    "Id": "krohnkite",
+    "Id": "forknite",
     "Version": "$VER",
     "License": "MIT",
-    "Website": "https://github.com/anametologin/krohnkite#readme"
+    "Website": "https://github.com/anametologin/forknite#readme"
   },
   "X-Plasma-API": "declarativescript",
   "X-Plasma-API-Minimum-Version": "6.0",

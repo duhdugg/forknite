@@ -28,22 +28,22 @@
 
     <entry name="enableThreeColumnLayout" type="Bool">
 	    <label>Enable/disable Three Column layout</label>
-        <default>true</default>
+        <default>false</default>
     </entry>
 
     <entry name="enableSpiralLayout" type="Bool">
         <label>Enable/disable Spiral layout</label>
-        <default>true</default>
+        <default>false</default>
     </entry>
 
     <entry name="enableSpreadLayout" type="Bool">
 	    <label>Enable/disable Spread layout</label>
-        <default>true</default>
+        <default>false</default>
     </entry>
 
     <entry name="enableStairLayout" type="Bool">
 	    <label>Enable/disable Stair layout</label>
-        <default>true</default>
+        <default>false</default>
     </entry>
 
     <entry name="stairReverse" type="Bool">
@@ -128,7 +128,7 @@
 
     <entry name="maximizeSoleTile" type="Bool">
 	    <label>If there is only one tile on the screen, remove screen gap and its borde, making it appear almost fullscreen.</label>
-        <default>false</default>
+        <default>true</default>
     </entry>
 
     <entry name="monocleMaximize" type="Bool">
@@ -138,7 +138,7 @@
 
     <entry name="monocleMinimizeRest" type="Bool">
 	    <label>Minimize other tiles than the current one in Monocle layout</label>
-        <default>false</default>
+        <default>true</default>
     </entry>
 
     <entry name="adjustLayout" type="Bool">
@@ -178,27 +178,27 @@
 
     <entry name="screenGapLeft" type="Int">
         <label>Gap between tiles and screen borders (Left)</label>
-        <default>0</default>
+        <default>4</default>
     </entry>
 
     <entry name="screenGapRight" type="Int">
         <label>Gap between tiles and screen borders (Right)</label>
-        <default>0</default>
+        <default>4</default>
     </entry>
 
     <entry name="screenGapTop" type="Int">
         <label>Gap between tiles and screen borders (Top)</label>
-        <default>0</default>
+        <default>4</default>
     </entry>
 
     <entry name="screenGapBottom" type="Int">
         <label>Gap between tiles and screen borders (Bottom)</label>
-        <default>0</default>
+        <default>4</default>
     </entry>
 
     <entry name="tileLayoutGap" type="Int">
         <label>Gap between tiles in Tile layout</label>
-        <default>0</default>
+        <default>4</default>
     </entry>
 
     <entry name="pollMouseXdotool" type="Bool">

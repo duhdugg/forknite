@@ -32,7 +32,7 @@ class LayoutStoreEntry {
     let layouts_str = CONFIG.layoutOrder.map(
       (layout, i) => i + "." + layout + ", "
     );
-    print(`Krohnkite: Screen(output):${output_name}, Desktop(name):${desktop_name}, layouts: ${layouts_str}`);
+    print(`Forknite: Screen(output):${output_name}, Desktop(name):${desktop_name}, layouts: ${layouts_str}`);
     this.currentIndex = 0;
     this.currentID = CONFIG.layoutOrder[0];
 

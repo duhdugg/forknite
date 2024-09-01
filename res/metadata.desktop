@@ -1,6 +1,6 @@
 [Desktop Entry]
-Name=Krohnkite
-Comment=A dynamic tiling script for KWin ($REV)
+Name=Forknite
+Comment=A fork of a fork of a dynamic tiling script for Plasma 6 ($REV)
 Icon=dialog-tile-clones
 
 X-Plasma-API=declarativescript
@@ -8,7 +8,7 @@ X-Plasma-MainScript=ui/main.qml
 
 X-KDE-PluginInfo-Author=Eon S. Jeon
 X-KDE-PluginInfo-Email=esjeon@hyunmu.am
-X-KDE-PluginInfo-Name=krohnkite
+X-KDE-PluginInfo-Name=forknite
 X-KDE-PluginInfo-Version=$VER
 
 X-KDE-PluginInfo-Depends=
@@ -16,9 +16,9 @@ X-KDE-PluginInfo-License=MIT
 X-KDE-ServiceTypes=KWin/Script,KCModule
 
 X-KDE-Library=kwin/effects/configs/kcm_kwin4_genericscripted
-X-KDE-PluginKeyword=krohnkite
+X-KDE-PluginKeyword=forknite
 
-X-KDE-ParentComponents=krohnkite
+X-KDE-ParentComponents=forknite
 Type=Service
 
 ## Uncomment this line for KWin 5.24.0 only

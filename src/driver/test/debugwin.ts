@@ -50,7 +50,7 @@ function debugWin(win: Window): string {
     { name: "keepBelow", opt: win.keepBelow },
     { name: "opacity", opt: win.opacity },
   ];
-  var s = "krohnkite:";
+  var s = "forknite:";
   w_props.forEach((el) => {
     if (
       typeof el.opt !== "undefined" &&
