@@ -97,7 +97,7 @@ class KWinConfig implements IConfig {
         ["enableQuarterLayout", false, QuarterLayout],
         ["enableStackedLayout", false, StackedLayout],
         ["enableFloatingLayout", false, FloatingLayout],
-        ["enableBTreeLayout", false, BTreeLayout],
+        ["enableBTreeLayout", true, BTreeLayout],
         ["enableCascadeLayout", false, CascadeLayout], // TODO: add config
       ] as Array<[string, boolean, ILayoutClass]>
     ).forEach(([configKey, defaultValue, layoutClass]) => {
