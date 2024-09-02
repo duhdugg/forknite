@@ -128,32 +128,34 @@ restart is required to deactivated it.
 
 ## Default Key Bindings
 
-| Key              | Action             |
-| ---------------- | ------------------ |
-| Meta + .         | Focus Next         |
-| Meta + ,         | Focus Previous     |
-|                  |                    |
-| Meta + J         | Focus Down         |
-| Meta + K         | Focus Up           |
-| Meta + H         | Focus Left         |
-| Meta + L         | Focus Right        |
-|                  |                    |
-| Meta + Shift + J | Move Down/Next     |
-| Meta + Shift + K | Move Up/Previous   |
-| Meta + Shift + H | Move Left          |
-| Meta + Shift + L | Move Right         |
-|                  |                    |
-| Meta + I         | Increase           |
-| Meta + D         | Decrease           |
-| Meta + F         | Toggle Floating    |
-| Meta + \         | Cycle Layout       |
-|                  |                    |
-| Meta + Return    | Set as Master      |
-|                  |                    |
-| Meta + T         | Use Tile Layout    |
-| Meta + M         | Use Monocle Layout |
-| _unbound_        | Use Spread Layout  |
-| _unbound_        | Use Stair Layout   |
+🚧 See `res/shortcuts.qml`
+
+<!-- | Key              | Action             | -->
+<!-- | ---------------- | ------------------ | -->
+<!-- | Meta + .         | Focus Next         | -->
+<!-- | Meta + ,         | Focus Previous     | -->
+<!-- |                  |                    | -->
+<!-- | Meta + J         | Focus Down         | -->
+<!-- | Meta + K         | Focus Up           | -->
+<!-- | Meta + H         | Focus Left         | -->
+<!-- | Meta + L         | Focus Right        | -->
+<!-- |                  |                    | -->
+<!-- | Meta + Shift + J | Move Down/Next     | -->
+<!-- | Meta + Shift + K | Move Up/Previous   | -->
+<!-- | Meta + Shift + H | Move Left          | -->
+<!-- | Meta + Shift + L | Move Right         | -->
+<!-- |                  |                    | -->
+<!-- | Meta + I         | Increase           | -->
+<!-- | Meta + D         | Decrease           | -->
+<!-- | Meta + F         | Toggle Floating    | -->
+<!-- | Meta + \         | Cycle Layout       | -->
+<!-- |                  |                    | -->
+<!-- | Meta + Return    | Set as Master      | -->
+<!-- |                  |                    | -->
+<!-- | Meta + T         | Use Tile Layout    | -->
+<!-- | Meta + M         | Use Monocle Layout | -->
+<!-- | _unbound_        | Use Spread Layout  | -->
+<!-- | _unbound_        | Use Stair Layout   | -->
 
 ## Tips
 
@@ -173,10 +175,10 @@ the full potential of the script.
    kwriteconfig6 --file ~/.config/kwinrc --group Windows --key SeparateScreenFocus true
 ```
 
-2. Bind keys for global shortcut `Switch to Next/Previous Screen`
-   (Recommend: `Meta + ,` / `Meta + .`)
-3. Bind keys for global shortcut `Window to Next/Previous Screen`
-   (Recommend: `Meta + <` / `Meta + >`)
+<!-- 2. Bind keys for global shortcut `Switch to Next/Previous Screen` -->
+<!--    (Recommend: `Meta + ,` / `Meta + .`) -->
+<!-- 3. Bind keys for global shortcut `Window to Next/Previous Screen` -->
+<!--    (Recommend: `Meta + <` / `Meta + >`) -->
 
 ### Removing Title Bars
 
