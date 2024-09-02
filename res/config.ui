@@ -649,9 +649,14 @@
             <property name="minimumSize">
              <size>
               <width>400</width>
-              <height>At existing position</height>
+              <height>0</height>
              </size>
             </property>
+            <item>
+             <property name="text">
+              <string>At existing position</string>
+             </property>
+            </item>
             <item>
              <property name="text">
               <string>First</string>
