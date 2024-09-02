@@ -213,7 +213,7 @@ Item {
 
         name: "ForkniteRotate";
         text: "Forknite: Rotate";
-        sequence: "Meta+R";
+        sequence: "Meta+/";
     }
     function getRotatePart() {
         return rotatePart;
@@ -223,7 +223,7 @@ Item {
 
         name: "ForkniteRotatePart";
         text: "Forknite: Rotate Part";
-        sequence: "Meta+Shift+R";
+        sequence: "Meta+?";
     }
     function getSetMaster() {
         return setMaster;
