@@ -20,6 +20,10 @@
 	    <label>Enable/disable Tile layout</label>
         <default>true</default>
     </entry>
+    <entry name="tileLayoutInitialRotationAngle" type="String">
+	    <label>Tile layout initial rotation angle</label>
+        <default>0</default>
+    </entry>
 
     <entry name="enableMonocleLayout" type="Bool">
 	    <label>Enable/disable Monocle layout</label>
@@ -56,6 +60,15 @@
         <default>false</default>
     </entry>
 
+    <entry name="enableColumnsLayout" type="Bool">
+	    <label>Enable/disable Columns layout</label>
+        <default>true</default>
+    </entry>
+    <entry name="columnsLayoutInitialRotationAngle" type="String">
+	    <label>Columns layout initial rotation angle</label>
+        <default>0</default>
+    </entry>
+
     <entry name="enableStackedLayout" type="Bool">
 	    <label>Enable/disable Stacked layout</label>
         <default>false</default>
@@ -87,7 +100,11 @@
     </entry>
 
     <entry name="ignoreScreen" type="String">
-	    <label>Do not apply tiling on some screens(comma-separated list of screen number)</label>
+	    <label>Do not apply tiling on some screens(comma-separated list of screen names)</label>
+        <default></default>
+    </entry>
+    <entry name="ignoreVDesktop" type="String">
+	    <label>Do not apply tiling on some virtual desktops(comma-separated list of virtual desktops names)</label>
         <default></default>
     </entry>
 

@@ -32,10 +32,11 @@ class KWinWindow implements IDriverWindow {
   }
 
   public get geometry(): Rect {
-    return toRect(this.window.bufferGeometry);
+    return toRect(this.window.frameGeometry);
   }
 
   public get shouldIgnore(): boolean {
+    if (this.window.deleted) return true;
     const resourceClass = String(this.window.resourceClass);
     const resourceName = String(this.window.resourceName);
     const windowRole = String(this.window.windowRole);
@@ -156,8 +157,8 @@ class KWinWindow implements IDriverWindow {
           geometry = this.adjustGeometry(geometry);
         }
       }
+      if (this.window.deleted) return;
       this.window.frameGeometry = toQRect(geometry);
-      this.window.rect;
     }
   }
 
@@ -175,6 +176,7 @@ class KWinWindow implements IDriverWindow {
   public visible(srf: ISurface): boolean {
     const ksrf = srf as KWinSurface;
     return (
+      !this.window.deleted &&
       !this.window.minimized &&
       (this.window.onAllDesktops ||
         this.window.desktops.indexOf(ksrf.desktop) !== -1) &&

@@ -33,6 +33,23 @@ class WindowStore {
     this.list.splice(srcIdx, 1);
     this.list.splice(after ? destIdx + 1 : destIdx, 0, srcWin);
   }
+  public moveNew(srcWin: WindowClass, destWin: WindowClass, after?: boolean) {
+    const srcIdx = this.list.indexOf(srcWin);
+    const destIdx = this.list.indexOf(destWin);
+    if (srcIdx === -1 || destIdx === -1) return;
+
+    if (srcIdx > destIdx) {
+      this.list.splice(srcIdx, 1);
+      this.list.splice(after ? destIdx + 1 : destIdx, 0, srcWin);
+    } else if (destIdx > srcIdx) {
+      this.list.splice(srcIdx, 1);
+      this.list.splice(after ? destIdx : destIdx - 1, 0, srcWin);
+    }
+  }
+  public getWindowById(id: string): WindowClass | null {
+    let idx = this.list.map((w) => w.id).indexOf(id);
+    return idx < 0 ? null : this.list[idx];
+  }
 
   public setMaster(window: WindowClass) {
     const idx = this.list.indexOf(window);

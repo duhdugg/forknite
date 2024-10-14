@@ -29,3 +29,10 @@ const enum MaximizeMode {
   MaximizeFull = MaximizeVertical | MaximizeHorizontal,
 }
 
+const enum RectParts {
+  Top,
+  Bottom,
+  Left,
+  Right,
+  Whole,
+}

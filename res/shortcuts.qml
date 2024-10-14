@@ -335,4 +335,14 @@ Item {
         text: "Forknite: Spiral Layout";
         sequence: "";
     }
+    function getColumnsLayout() {
+        return columnsLayout;
+    }
+    ShortcutHandler {
+        id: columnsLayout;
+
+        name: "ForkniteColumnsLayout";
+        text: "Forknite: Columns Layout";
+        sequence: "";
+    }
 }

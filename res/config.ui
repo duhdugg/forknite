@@ -23,7 +23,7 @@
    <item row="0" column="0">
     <widget class="QTabWidget" name="configTabs">
      <property name="currentIndex">
-      <number>4</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="layoutTab">
       <attribute name="title">
@@ -77,6 +77,79 @@
              <bool>false</bool>
             </property>
            </widget>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="tileLayoutConfigLayout">
+            <property name="leftMargin">
+             <number>20</number>
+            </property>
+            <property name="rightMargin">
+             <number>20</number>
+            </property>
+            <item>
+             <widget class="QGroupBox" name="groupBoxTileConfigLayout">
+              <property name="title">
+               <string/>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_2">
+               <item row="0" column="0">
+                <layout class="QHBoxLayout" name="horizontalLayout_3">
+                 <item>
+                  <widget class="QLabel" name="tileLabel11">
+                   <property name="text">
+                    <string>Initial rotation angle</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="kcfg_tileLayoutInitialRotationAngle">
+                   <property name="minimumSize">
+                    <size>
+                     <width>70</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <item>
+                    <property name="text">
+                     <string>0</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>90</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>180</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>270</string>
+                    </property>
+                   </item>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item row="0" column="1">
+                <spacer name="horizontalSpacer">
+                 <property name="orientation">
+                  <enum>Qt::Orientation::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
           </item>
           <item>
            <widget class="QCheckBox" name="kcfg_enableMonocleLayout">
@@ -162,6 +235,89 @@
            </widget>
           </item>
           <item>
+           <widget class="QCheckBox" name="kcfg_enableColumnsLayout">
+            <property name="toolTip">
+             <string>Enable Columns layout</string>
+            </property>
+            <property name="text">
+             <string>Columns Layout</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <layout class="QVBoxLayout" name="ColumnsLayoutConfigLayout">
+            <property name="leftMargin">
+             <number>20</number>
+            </property>
+            <property name="rightMargin">
+             <number>20</number>
+            </property>
+            <item>
+             <widget class="QGroupBox" name="groupBoxColumnsConfigLayout">
+              <property name="title">
+               <string/>
+              </property>
+              <layout class="QGridLayout" name="gridLayout_3">
+               <item row="0" column="0">
+                <layout class="QHBoxLayout" name="horizontalLayout_4">
+                 <item>
+                  <widget class="QLabel" name="tileLabel12">
+                   <property name="text">
+                    <string>Initial rotation angle</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QComboBox" name="kcfg_columnsLayoutInitialRotationAngle">
+                   <property name="minimumSize">
+                    <size>
+                     <width>70</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                   <item>
+                    <property name="text">
+                     <string>0</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>90</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>180</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>270</string>
+                    </property>
+                   </item>
+                  </widget>
+                 </item>
+                </layout>
+               </item>
+               <item row="0" column="1">
+                <spacer name="horizontalSpacer">
+                 <property name="orientation">
+                  <enum>Qt::Orientation::Horizontal</enum>
+                 </property>
+                 <property name="sizeHint" stdset="0">
+                  <size>
+                   <width>40</width>
+                   <height>20</height>
+                  </size>
+                 </property>
+                </spacer>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </item>
+          <item>
            <widget class="QCheckBox" name="kcfg_enableSpreadLayout">
             <property name="toolTip">
              <string>Enable Spread layout</string>
@@ -230,7 +386,7 @@
        <item>
         <spacer name="verticalSpacer_2">
          <property name="orientation">
-          <enum>Qt::Vertical</enum>
+          <enum>Qt::Orientation::Vertical</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -280,7 +436,7 @@
              <string>Top</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignCenter</set>
+             <set>Qt::AlignmentFlag::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -297,7 +453,7 @@
              <string>Bottom</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignCenter</set>
+             <set>Qt::AlignmentFlag::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -307,7 +463,7 @@
              <string>Left</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignCenter</set>
+             <set>Qt::AlignmentFlag::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -317,7 +473,7 @@
              <string>Right</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignCenter</set>
+             <set>Qt::AlignmentFlag::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -381,7 +537,7 @@
        <item>
         <spacer name="verticalSpacer">
          <property name="orientation">
-          <enum>Qt::Vertical</enum>
+          <enum>Qt::Orientation::Vertical</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -431,7 +587,6 @@
         <widget class="QGroupBox" name="groupBox_3">
          <property name="font">
           <font>
-           <weight>50</weight>
            <bold>false</bold>
           </font>
          </property>
@@ -443,7 +598,6 @@
            <widget class="QLabel" name="label_2">
             <property name="font">
              <font>
-              <weight>50</weight>
               <italic>false</italic>
               <bold>false</bold>
               <underline>true</underline>
@@ -453,7 +607,7 @@
              <string>Up</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignCenter</set>
+             <set>Qt::AlignmentFlag::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -467,7 +621,6 @@
             </property>
             <property name="font">
              <font>
-              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -489,7 +642,6 @@
             </property>
             <property name="font">
              <font>
-              <weight>75</weight>
               <bold>true</bold>
              </font>
             </property>
@@ -505,7 +657,6 @@
            <widget class="QLabel" name="label_4">
             <property name="font">
              <font>
-              <weight>50</weight>
               <italic>false</italic>
               <bold>false</bold>
               <underline>true</underline>
@@ -515,7 +666,7 @@
              <string>Left</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignCenter</set>
+             <set>Qt::AlignmentFlag::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -525,7 +676,7 @@
              <string>Focus Next</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignCenter</set>
+             <set>Qt::AlignmentFlag::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -533,7 +684,6 @@
            <widget class="QLabel" name="label_3">
             <property name="font">
              <font>
-              <weight>50</weight>
               <italic>false</italic>
               <bold>false</bold>
               <underline>true</underline>
@@ -543,7 +693,7 @@
              <string>Down</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignCenter</set>
+             <set>Qt::AlignmentFlag::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -551,7 +701,6 @@
            <widget class="QLabel" name="label_5">
             <property name="font">
              <font>
-              <weight>50</weight>
               <italic>false</italic>
               <bold>false</bold>
               <underline>true</underline>
@@ -561,7 +710,7 @@
              <string>Right</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignCenter</set>
+             <set>Qt::AlignmentFlag::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -571,7 +720,7 @@
              <string>Focus Prev</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignCenter</set>
+             <set>Qt::AlignmentFlag::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -581,7 +730,7 @@
              <string>Adjust Layout</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignCenter</set>
+             <set>Qt::AlignmentFlag::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -591,7 +740,7 @@
              <string>Adjust Layout</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignCenter</set>
+             <set>Qt::AlignmentFlag::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -601,7 +750,7 @@
              <string>Focus Up</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignCenter</set>
+             <set>Qt::AlignmentFlag::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -611,7 +760,7 @@
              <string>Focus Down</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignCenter</set>
+             <set>Qt::AlignmentFlag::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -621,7 +770,7 @@
              <string>Focus Left</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignCenter</set>
+             <set>Qt::AlignmentFlag::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -631,7 +780,7 @@
              <string>Focus Right</string>
             </property>
             <property name="alignment">
-             <set>Qt::AlignCenter</set>
+             <set>Qt::AlignmentFlag::AlignCenter</set>
             </property>
            </widget>
           </item>
@@ -644,7 +793,7 @@
           <string>Position of the New Window</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_9">
-          <item alignment="Qt::AlignLeft|Qt::AlignVCenter">
+          <item alignment="Qt::AlignmentFlag::Qt::AlignmentFlag::AlignVCenter">
            <widget class="QComboBox" name="kcfg_newWindowPosition">
             <property name="minimumSize">
              <size>
@@ -680,7 +829,7 @@
        <item>
         <spacer name="verticalSpacer_3">
          <property name="orientation">
-          <enum>Qt::Vertical</enum>
+          <enum>Qt::Orientation::Vertical</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -829,6 +978,20 @@
             </property>
            </widget>
           </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="ignoreDesktopLabel">
+            <property name="text">
+             <string>On Virtual Desktop</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="kcfg_ignoreVDesktop">
+            <property name="toolTip">
+             <string>Comma-separated list of Virtual Desktops names. Windows corresponding to these will not be tiled.</string>
+            </property>
+           </widget>
+          </item>
          </layout>
         </widget>
        </item>
@@ -858,7 +1021,7 @@
        <item>
         <spacer name="verticalSpacer_4">
          <property name="orientation">
-          <enum>Qt::Vertical</enum>
+          <enum>Qt::Orientation::Vertical</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -936,10 +1099,10 @@
        <item>
         <spacer name="debugSpacer">
          <property name="orientation">
-          <enum>Qt::Vertical</enum>
+          <enum>Qt::Orientation::Vertical</enum>
          </property>
          <property name="sizeType">
-          <enum>QSizePolicy::Maximum</enum>
+          <enum>QSizePolicy::Policy::Maximum</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>
@@ -972,7 +1135,7 @@
        <item>
         <spacer name="verticalSpacer_5">
          <property name="orientation">
-          <enum>Qt::Vertical</enum>
+          <enum>Qt::Orientation::Vertical</enum>
          </property>
          <property name="sizeHint" stdset="0">
           <size>

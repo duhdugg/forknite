@@ -49,7 +49,8 @@ class KWinSurface implements ISurface {
     this.id = KWinSurface.generateId(output.name, activity, desktop.name);
     this.ignore =
       KWINCONFIG.ignoreActivity.indexOf(activity) >= 0 ||
-      KWINCONFIG.ignoreScreen.indexOf(output.name) >= 0;
+      KWINCONFIG.ignoreScreen.indexOf(output.name) >= 0 ||
+      KWINCONFIG.ignoreVDesktop.indexOf(desktop.name) >= 0;
     this.workingArea = toRect(
       workspace.clientArea(ClientAreaOption.PlacementArea, output, desktop)
     );

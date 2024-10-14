@@ -56,7 +56,20 @@ class TileLayout implements ILayout {
         new StackLayoutPart()
       )
     );
-
+    switch (CONFIG.tileLayoutInitialAngle) {
+      case "1": {
+        this.parts.angle = 90;
+        break;
+      }
+      case "2": {
+        this.parts.angle = 180;
+        break;
+      }
+      case "3": {
+        this.parts.angle = 270;
+        break;
+      }
+    }
     const masterPart = this.parts.inner;
     masterPart.gap =
       masterPart.primary.inner.gap =

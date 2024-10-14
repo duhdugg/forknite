@@ -1,6 +1,6 @@
 {
   "name": "forknite",
-  "version": "0.9.7",
+  "version": "0.9.8.2",
   "description": "A fork of a fork of a dynamic tiling extension for Plasma 6 Wayland sessions",
   "main": "forknite.js",
   "directories": {

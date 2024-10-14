@@ -18,6 +18,8 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+type percentType = number;
+
 enum Shortcut {
   FocusNext,
   FocusPrev,
@@ -106,6 +108,7 @@ interface IShortcuts {
   getFloatingLayout(): ShortcutHandler;
   getQuarterLayout(): ShortcutHandler;
   getStackedLayout(): ShortcutHandler;
+  getColumnsLayout(): ShortcutHandler;
   getSpiralLayout(): ShortcutHandler;
   getBTreeLayout(): ShortcutHandler;
 }
@@ -116,6 +119,8 @@ interface IConfig {
   //#region Layout
   layoutOrder: string[];
   layoutFactories: { [key: string]: () => ILayout };
+  tileLayoutInitialAngle: string;
+  columnsLayoutInitialAngle: string;
   monocleMaximize: boolean;
   maximizeSoleTile: boolean;
   //#endregion
@@ -199,6 +204,12 @@ interface ILayout {
   ): void;
   apply(ctx: EngineContext, tileables: WindowClass[], area: Rect): void;
   handleShortcut?(ctx: EngineContext, input: Shortcut, data?: any): boolean;
+  drag?(
+    ctx: EngineContext,
+    activationPoint: [number, number],
+    window: WindowClass,
+    workingArea: Rect
+  ): boolean;
 
   toString(): string;
 }

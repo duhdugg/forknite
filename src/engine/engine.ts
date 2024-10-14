@@ -41,6 +41,8 @@ class TilingEngine {
    * Used when tile is resized using mouse.
    */
   public adjustLayout(basis: WindowClass) {
+    let delta = basis.geometryDelta;
+    if (delta === null) return;
     const srf = basis.surface;
     const layout = this.layouts.getCurrentLayout(srf);
     if (layout.adjust) {
@@ -51,7 +53,7 @@ class TilingEngine {
         CONFIG.screenGapBottom,
       );
       const tiles = this.windows.getVisibleTiles(srf);
-      layout.adjust(area, tiles, basis, basis.geometryDelta);
+      layout.adjust(area, tiles, basis, delta);
     }
   }
 
@@ -224,6 +226,7 @@ class TilingEngine {
     });
 
     const tileables = this.windows.getVisibleTileables(srf);
+
     if (CONFIG.maximizeSoleTile && tileables.length === 1) {
       tileables[0].state = WindowState.Maximized;
       tileables[0].geometry = workingArea;

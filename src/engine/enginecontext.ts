@@ -52,6 +52,16 @@ class EngineContext {
     this.engine.windows.move(window, target, after);
   }
 
+  public moveWindowByWinId(
+    window: WindowClass,
+    targetId: string,
+    after?: boolean
+  ) {
+    let target = this.engine.windows.getWindowById(targetId);
+    if (target === null) return;
+    this.engine.windows.moveNew(window, target, after);
+  }
+
   public showNotification(text: string) {
     this.drvctx.showNotification(text);
   }

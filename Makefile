@@ -1,5 +1,5 @@
 PROJECT_NAME = forknite
-PROJECT_VER  = 0.9.7
+PROJECT_VER  = 0.9.8.2
 PROJECT_REV  = $(shell git rev-parse HEAD | cut -b-7)
 
 KWINPKG_FILE = $(PROJECT_NAME)-$(PROJECT_VER).kwinscript

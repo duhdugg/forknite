@@ -23,6 +23,8 @@ class KWinConfig implements IConfig {
   public layoutOrder: string[];
   public layoutFactories: { [key: string]: () => ILayout };
   public maximizeSoleTile: boolean;
+  public tileLayoutInitialAngle: string;
+  public columnsLayoutInitialAngle: string;
   public monocleMaximize: boolean;
   public monocleMinimizeRest: boolean;
   public stairReverse: boolean; // kwin.specific
@@ -69,6 +71,7 @@ class KWinConfig implements IConfig {
 
   public ignoreActivity: string[];
   public ignoreScreen: string[];
+  public ignoreVDesktop: string[];
 
   public screenDefaultLayout: string[];
   //#endregion
@@ -90,6 +93,7 @@ class KWinConfig implements IConfig {
       [
         ["enableTileLayout", true, TileLayout],
         ["enableMonocleLayout", true, MonocleLayout],
+        ["enableColumnsLayout", true, ColumnsLayout],
         ["enableThreeColumnLayout", true, ThreeColumnLayout],
         ["enableSpreadLayout", true, SpreadLayout],
         ["enableStairLayout", true, StairLayout],
@@ -107,6 +111,14 @@ class KWinConfig implements IConfig {
     });
 
     this.maximizeSoleTile = KWIN.readConfig("maximizeSoleTile", false);
+    this.tileLayoutInitialAngle = KWIN.readConfig(
+      "tileLayoutInitialRotationAngle",
+      "0"
+    );
+    this.columnsLayoutInitialAngle = KWIN.readConfig(
+      "columnsLayoutInitialRotationAngle",
+      "0"
+    );
     this.monocleMaximize = KWIN.readConfig("monocleMaximize", true);
     this.monocleMinimizeRest = KWIN.readConfig("monocleMinimizeRest", false);
     this.stairReverse = KWIN.readConfig("stairReverse", false);
@@ -114,7 +126,7 @@ class KWinConfig implements IConfig {
     this.adjustLayout = KWIN.readConfig("adjustLayout", true);
     this.adjustLayoutLive = KWIN.readConfig("adjustLayoutLive", true);
     this.keepFloatAbove = KWIN.readConfig("keepFloatAbove", true);
-    this.keepTilingOnDrag = KWIN.readConfig("keepTilingOnDrag", false);
+    this.keepTilingOnDrag = KWIN.readConfig("keepTilingOnDrag", true);
     this.noTileBorder = KWIN.readConfig("noTileBorder", false);
 
     this.limitTileWidthRatio = 0;
@@ -151,6 +163,7 @@ class KWinConfig implements IConfig {
     this.ignoreRole = commaSeparate(KWIN.readConfig("ignoreRole", "quake"));
 
     this.ignoreScreen = commaSeparate(KWIN.readConfig("ignoreScreen", ""));
+    this.ignoreVDesktop = commaSeparate(KWIN.readConfig("ignoreVDesktop", ""));
     this.ignoreTitle = commaSeparate(KWIN.readConfig("ignoreTitle", ""));
 
     this.screenDefaultLayout = commaSeparate(

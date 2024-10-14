@@ -27,11 +27,15 @@
 
 class TilingController {
   public lastFocused: WindowClass | null;
-  private engine: TilingEngine;
+  public engine: TilingEngine;
+  private isDragging: boolean;
+  private dragCompleteTime: number | null;
 
   public constructor(engine: TilingEngine) {
     this.engine = engine;
     this.lastFocused = null;
+    this.isDragging = false;
+    this.dragCompleteTime = null;
   }
 
   public onSurfaceUpdate(ctx: IDriverContext, comment: string): void {
@@ -87,10 +91,53 @@ class TilingController {
     /* do nothing */
   }
 
+  public onWindowDragging(
+    ctx: IDriverContext,
+    window: WindowClass,
+    windowRect: Rect
+  ): void {
+    if (this.isDragging) return;
+    // 100 milliseconds - min interval between run this function
+    if (
+      this.dragCompleteTime !== null &&
+      Date.now() - this.dragCompleteTime < 100
+    )
+      return;
+    const srf = ctx.currentSurface;
+    const layout = this.engine.layouts.getCurrentLayout(srf);
+    if (!layout.drag) return;
+    // if (!(layout.drag && layout.isDragging && layout.isDragging(window)))
+    //   return;
+    if (window.state === WindowState.Tiled) {
+      window.setDraggingState();
+    }
+    if (window.state === WindowState.Dragging) {
+      const wr = toRect(windowRect);
+      if (
+        layout.drag(
+          new EngineContext(ctx, this.engine),
+          wr.activationPoint,
+          window,
+          srf.workingArea as Rect
+        )
+      ) {
+        this.engine.arrange(ctx);
+      }
+
+      this.dragCompleteTime = Date.now();
+    }
+    this.isDragging = false;
+  }
+
   public onWindowMoveOver(ctx: IDriverContext, window: WindowClass): void {
     debugObj(() => ["onWindowMoveOver", { window }]);
-
     /* swap window by dragging */
+    if (window.state === WindowState.Dragging) {
+      window.removeDraggingState(WindowState.Tiled);
+      this.engine.arrange(ctx);
+      return;
+    }
+
     if (window.state === WindowState.Tiled) {
       const tiles = this.engine.windows.getVisibleTiles(ctx.currentSurface);
       const cursorPos = ctx.cursorPosition || window.actualGeometry.center;

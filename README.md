@@ -109,9 +109,10 @@ restart is required to deactivated it.
 3. Type in filter string: `forknite`
 4. Right after `FORKNITE
 5. Copy your screen name. This name usually your video port DP-2 or HDMI-A-1 or Virtual-1 for VM or something like that
-6. Open Forknite options: ![options](img/conf.png)
-7. Tab `Rules->Screen default layout` and type `YOUR_SCREEN_NAME:LAYOUT_ID` for example: `HDMI-A-1:2,DP-2:7`, or if you have multiple `Virtual Desktop` on screen you can write `SCREEN_NAME:DESKTOP_NAME:LAYOUT_ID`. More examples: `:2` - makes layout#2 default on all screens, `:Desktop 1:2` - makes layout#2 default on all desktops with name `Desktop 1`
-8. `Apply` -> `reboot`
+6. `LAYOUT_NAME`(the case doen't matter,`layout` ending can be omitted): `tilelayout`, `monoclelayout`, `columns`, `threecolumnlayout,` `spreadlayout`, `stairlayout`, `spirallayout`, `stackedlayout`, `floatinglayout`, `btreelayout`
+7. Open Forknite options: ![options](img/conf.png)
+8. Tab `Rules->Screen default layout` and type `YOUR_SCREEN_NAME:LAYOUT_NAME` for example: `HDMI-A-1:columns,DP-2:spread` or `YOUR_SCREEN_NAME:LAYOUT_ID` for example: `HDMI-A-1:2,DP-2:7`, or if you have multiple `Virtual Desktop` on screen you can write `SCREEN_NAME:DESKTOP_NAME:LAYOUT_NAME` or `SCREEN_NAME:DESKTOP_NAME:LAYOUT_ID`. More examples: `:2` - makes layout#2 default on all screens, `:Desktop 1:2` - makes layout#2 default on all desktops with name `Desktop 1`.
+9. `Apply` -> `reboot`
 
 [Video: assign default layer for screen](https://github.com/anametologin/forknite/assets/165245883/f569f1de-1721-4cdf-b3fb-96782a3e3189)
 

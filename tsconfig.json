@@ -3,11 +3,11 @@
   "exclude": ["*.*", "pkg/"],
   "compileOnSave": true,
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
     "outFile": "forknite.js",
     "noEmitOnError": false,
     "removeComments": true,
-    "lib": ["es5"],
+    "lib": ["es6"],
     "alwaysStrict": true,
     "strict": true
   }

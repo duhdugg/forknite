@@ -132,8 +132,11 @@ class KWinDriver implements IDriverContext {
     }
   }
 
-  private addWindow(client: Window) {
+  private addWindow(client: Window): WindowClass | null {
     if (
+      !client.deleted &&
+      client.pid > 1 &&
+      !client.popupWindow &&
       client.normalWindow &&
       !client.hidden &&
       client.width * client.height > 10
@@ -143,6 +146,7 @@ class KWinDriver implements IDriverContext {
       this.control.onWindowAdded(this, window);
       if (window.state !== WindowState.Unmanaged) {
         this.bindWindowEvents(window, client);
+        return window;
       } else {
         this.windowMap.remove(client);
         if (KWIN.readConfig("debugActiveWin", false))
@@ -152,6 +156,7 @@ class KWinDriver implements IDriverContext {
       if (KWIN.readConfig("debugActiveWin", false))
         print("Filtered: " + debugWin(client));
     }
+    return null;
   }
 
   //#region implement methods of IDriverContext`
@@ -279,6 +284,9 @@ class KWinDriver implements IDriverContext {
       .getStackedLayout()
       .activated.connect(callbackShortcutLayout(StackedLayout));
     this.shortcuts
+      .getColumnsLayout()
+      .activated.connect(callbackShortcutLayout(ColumnsLayout));
+    this.shortcuts
       .getSpiralLayout()
       .activated.connect(callbackShortcutLayout(SpiralLayout));
     this.shortcuts
@@ -349,7 +357,15 @@ class KWinDriver implements IDriverContext {
     );
 
     this.connect(this.workspace.windowAdded, (client: Window) => {
-      this.addWindow(client);
+      const window = this.addWindow(client);
+      if (client.active && window !== null)
+        this.control.onWindowFocused(this, window);
+    });
+
+    this.connect(this.workspace.windowActivated, (client: Window) => {
+      const window = this.windowMap.get(client);
+      if (client.active && window !== null)
+        this.control.onWindowFocused(this, window);
     });
 
     this.connect(this.workspace.windowRemoved, (client: Window) => {
@@ -390,6 +406,11 @@ class KWinDriver implements IDriverContext {
       )
     );
 
+    this.connect(client.interactiveMoveResizeStepped, (geometry) => {
+      if (client.resize) return;
+      this.control.onWindowDragging(this, window, geometry);
+    });
+
     this.connect(client.moveResizedChanged, () => {
       debugObj(() => [
         "moveResizedChanged",
@@ -419,10 +440,6 @@ class KWinDriver implements IDriverContext {
         if (!window.actualGeometry.equals(window.geometry))
           this.control.onWindowGeometryChanged(this, window);
       }
-    });
-
-    this.connect(client.activeChanged, () => {
-      if (client.active) this.control.onWindowFocused(this, window);
     });
 
     this.connect(client.outputChanged, () =>
