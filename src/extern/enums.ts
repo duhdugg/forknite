@@ -36,3 +36,16 @@ const enum RectParts {
   Right,
   Whole,
 }
+
+const enum WindowLayer {
+  Below,
+  Normal,
+  Above,
+}
+
+function getWindowLayer(index: number): WindowLayer {
+  if (index === 0) return WindowLayer.Below;
+  else if (index === 1) return WindowLayer.Normal;
+  else if (index === 2) return WindowLayer.Above;
+  else return WindowLayer.Normal;
+}

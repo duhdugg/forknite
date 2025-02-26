@@ -89,19 +89,6 @@ class WindowStore {
     this.list.splice(1, 0, window);
   }
 
-  public relative_state(window: WindowClass) {
-    this.list.splice(this.getLastFocusedIndex(window), 0, window);
-  }
-
-  public getLastFocusedIndex(window: WindowClass): number {
-    const lastFocused = window.driver.control.lastFocused;
-    if (lastFocused === null) {
-      return 0;
-    }
-    const idx = this.indexOf(lastFocused);
-    return idx >= 0 ? idx : 0;
-  }
-
   public remove(window: WindowClass) {
     const idx = this.list.indexOf(window);
     if (idx >= 0) this.list.splice(idx, 1);

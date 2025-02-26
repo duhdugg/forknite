@@ -121,14 +121,19 @@ interface IConfig {
   layoutFactories: { [key: string]: () => ILayout };
   tileLayoutInitialAngle: string;
   columnsLayoutInitialAngle: string;
+  columnsBalanced: boolean;
+  columnsLayerConf: string[];
   monocleMaximize: boolean;
-  maximizeSoleTile: boolean;
+  soleWindowWidth: number;
+  soleWindowHeight: number;
+  soleWindowNoBorders: boolean;
   //#endregion
 
   //#region Features
   adjustLayout: boolean;
   adjustLayoutLive: boolean;
-  keepFloatAbove: boolean;
+  floatedWindowsLayer: WindowLayer;
+  tiledWindowsLayer: WindowLayer;
   keepTilingOnDrag: boolean;
   noTileBorder: boolean;
   limitTileWidthRatio: number;
@@ -154,12 +159,13 @@ interface IDriverWindow {
   readonly geometry: Readonly<Rect>;
   readonly id: string;
   readonly maximized: boolean;
+  readonly minimized: boolean;
   readonly shouldIgnore: boolean;
   readonly shouldFloat: boolean;
 
   surface: ISurface;
 
-  commit(geometry?: Rect, noBorder?: boolean, keepAbove?: boolean): void;
+  commit(geometry?: Rect, noBorder?: boolean, windowLayer?: WindowLayer): void;
   visible(srf: ISurface): boolean;
 }
 
@@ -167,6 +173,10 @@ interface ISurface {
   readonly id: string;
   readonly ignore: boolean;
   readonly workingArea: Readonly<Rect>;
+
+  readonly output: Output;
+  readonly activity: string;
+  readonly desktop: VirtualDesktop;
 
   next(): ISurface | null;
 }
@@ -206,7 +216,7 @@ interface ILayout {
   handleShortcut?(ctx: EngineContext, input: Shortcut, data?: any): boolean;
   drag?(
     ctx: EngineContext,
-    activationPoint: [number, number],
+    draggingRect: Rect,
     window: WindowClass,
     workingArea: Rect
   ): boolean;

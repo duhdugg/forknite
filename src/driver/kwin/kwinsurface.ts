@@ -19,15 +19,25 @@
 // DEALINGS IN THE SOFTWARE.
 
 class KWinSurface implements ISurface {
+  private static getHash(s: string): string {
+    let hash = 0;
+    if (s.length == 0) return `0`;
+    for (let i = 0; i < s.length; i++) {
+      let charCode = s.charCodeAt(i);
+      hash = (hash << 5) - hash + charCode;
+      hash = hash & hash;
+    }
+    return `${hash}`;
+  }
   public static generateId(
     screenName: string,
     activity: string,
     desktopName: string
-  ) {
+  ): string {
     let path = screenName;
     if (KWINCONFIG.layoutPerActivity) path += "@" + activity;
     if (KWINCONFIG.layoutPerDesktop) path += "#" + desktopName;
-    return path;
+    return KWinSurface.getHash(path);
   }
 
   public readonly id: string;
@@ -46,7 +56,7 @@ class KWinSurface implements ISurface {
   ) {
     //const activityName = activityInfo.activityName(activity);
 
-    this.id = KWinSurface.generateId(output.name, activity, desktop.name);
+    this.id = KWinSurface.generateId(output.name, activity, desktop.id);
     this.ignore =
       KWINCONFIG.ignoreActivity.indexOf(activity) >= 0 ||
       KWINCONFIG.ignoreScreen.indexOf(output.name) >= 0 ||

@@ -54,7 +54,6 @@ class WindowClass {
   }
 
   public readonly id: string;
-  public readonly driver: KWinDriver;
   public readonly window: IDriverWindow;
 
   public get actualGeometry(): Readonly<Rect> {
@@ -160,9 +159,8 @@ class WindowClass {
   private shouldCommitFloat: boolean;
   private weightMap: { [key: string]: number };
 
-  constructor(driver: KWinDriver, window: IDriverWindow) {
+  constructor(window: IDriverWindow) {
     this.id = window.id;
-    this.driver = driver;
     this.window = window;
 
     this.floatGeometry = window.geometry;
@@ -174,37 +172,49 @@ class WindowClass {
     this.weightMap = {};
   }
 
-  public commit() {
+  public commit(noBorders?: boolean) {
     const state = this.state;
     debugObj(() => ["Window#commit", { state: WindowState[state] }]);
     switch (state) {
       case WindowState.Dragging:
         break;
       case WindowState.NativeMaximized:
-        this.window.commit(undefined, undefined, false);
+        this.window.commit(undefined, undefined, undefined);
         break;
 
       case WindowState.NativeFullscreen:
-        this.window.commit(undefined, undefined, undefined);
+        this.window.commit(undefined, undefined, WindowLayer.Normal);
         break;
 
       case WindowState.Floating:
         if (!this.shouldCommitFloat) break;
-        this.window.commit(this.floatGeometry, false, CONFIG.keepFloatAbove);
+        this.window.commit(
+          this.floatGeometry,
+          false,
+          CONFIG.floatedWindowsLayer
+        );
         this.shouldCommitFloat = false;
         break;
 
       case WindowState.Maximized:
-        this.window.commit(this.geometry, true, false);
+        this.window.commit(this.geometry, true, WindowLayer.Normal);
         break;
 
       case WindowState.Tiled:
-        this.window.commit(this.geometry, CONFIG.noTileBorder, false);
+        this.window.commit(
+          this.geometry,
+          CONFIG.noTileBorder || Boolean(noBorders),
+          CONFIG.tiledWindowsLayer
+        );
         break;
 
       case WindowState.TiledAfloat:
         if (!this.shouldCommitFloat) break;
-        this.window.commit(this.floatGeometry, false, CONFIG.keepFloatAbove);
+        this.window.commit(
+          this.floatGeometry,
+          false,
+          CONFIG.floatedWindowsLayer
+        );
         this.shouldCommitFloat = false;
         break;
     }
@@ -222,6 +232,9 @@ class WindowClass {
 
   public visible(srf: ISurface): boolean {
     return this.window.visible(srf);
+  }
+  public get minimized(): boolean {
+    return this.window.minimized;
   }
 
   public toString(): string {

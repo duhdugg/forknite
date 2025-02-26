@@ -55,7 +55,7 @@ class KWinDriver implements IDriverContext {
     // TODO: fousing window on other screen?
     // TODO: find a way to change activity
 
-    if (this.workspace.currentDesktop.name !== ksrf.desktop.name)
+    if (this.workspace.currentDesktop.id !== ksrf.desktop.id)
       this.workspace.currentDesktop = ksrf.desktop;
     if (this.workspace.currentActivity !== ksrf.activity)
       this.workspace.currentActivity = ksrf.activity;
@@ -67,8 +67,10 @@ class KWinDriver implements IDriverContext {
   }
 
   public set currentWindow(window: WindowClass | null) {
-    if (window !== null)
+    if (window !== null) {
+      window.timestamp = new Date().getTime();
       this.workspace.activeWindow = (window.window as KWinWindow).window;
+    }
   }
 
   public get screens(): ISurface[] {
@@ -95,8 +97,8 @@ class KWinDriver implements IDriverContext {
   public workspace: Workspace;
   private shortcuts: IShortcuts;
   private engine: TilingEngine;
-  public control: TilingController;
-  public windowMap: WrapperMap<Window, WindowClass>;
+  private control: TilingController;
+  private windowMap: WrapperMap<Window, WindowClass>;
   private entered: boolean;
   private mousePoller: KWinMousePoller;
 
@@ -109,7 +111,7 @@ class KWinDriver implements IDriverContext {
     this.windowMap = new WrapperMap(
       (client: Window) => KWinWindow.generateID(client),
       (client: Window) =>
-        new WindowClass(this, new KWinWindow(client, this.workspace))
+        new WindowClass(new KWinWindow(client, this.workspace))
     );
     this.entered = false;
     this.mousePoller = new KWinMousePoller();
@@ -135,7 +137,7 @@ class KWinDriver implements IDriverContext {
   private addWindow(client: Window): WindowClass | null {
     if (
       !client.deleted &&
-      client.pid > 1 &&
+      client.pid >= 0 &&
       !client.popupWindow &&
       client.normalWindow &&
       !client.hidden &&
@@ -404,6 +406,9 @@ class KWinDriver implements IDriverContext {
         window,
         "fullscreen=" + client.fullScreen
       )
+    );
+    this.connect(client.desktopsChanged, () =>
+      this.control.onDesktopsChanged(this, window)
     );
 
     this.connect(client.interactiveMoveResizeStepped, (geometry) => {

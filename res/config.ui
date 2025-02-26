@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>440</width>
-    <height>755</height>
+    <width>817</width>
+    <height>1112</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -257,8 +257,8 @@
               <property name="title">
                <string/>
               </property>
-              <layout class="QGridLayout" name="gridLayout_3">
-               <item row="0" column="0">
+              <layout class="QVBoxLayout" name="verticalLayout_11">
+               <item>
                 <layout class="QHBoxLayout" name="horizontalLayout_4">
                  <item>
                   <widget class="QLabel" name="tileLabel12">
@@ -297,20 +297,48 @@
                    </item>
                   </widget>
                  </item>
+                 <item>
+                  <spacer name="horizontalSpacer">
+                   <property name="orientation">
+                    <enum>Qt::Orientation::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
                 </layout>
                </item>
-               <item row="0" column="1">
-                <spacer name="horizontalSpacer">
-                 <property name="orientation">
-                  <enum>Qt::Orientation::Horizontal</enum>
+               <item>
+                <widget class="QCheckBox" name="kcfg_columnsBalanced">
+                 <property name="toolTip">
+                  <string>Creating a new window in the shortest column</string>
                  </property>
-                 <property name="sizeHint" stdset="0">
-                  <size>
-                   <width>40</width>
-                   <height>20</height>
-                  </size>
+                 <property name="text">
+                  <string>Balanced</string>
                  </property>
-                </spacer>
+                </widget>
+               </item>
+               <item>
+                <layout class="QHBoxLayout" name="hLayout_columnsConf">
+                 <item>
+                  <widget class="QLabel" name="lbl_columsLayerConf">
+                   <property name="text">
+                    <string>Config</string>
+                   </property>
+                  </widget>
+                 </item>
+                 <item>
+                  <widget class="QLineEdit" name="kcfg_columnsLayerConf">
+                   <property name="toolTip">
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Comma-separated list OutputName:VirtualDesktopName:ActivityName:ColumnWeight:ColumnWeight:... OutputName value you will see if run KSystemLog and type forknite in filter string. The data will right under Forknite start string.If all weights are equal they will not be taken into account &lt;/p&gt;&lt;p&gt;  Example: Any monitors 3 columns without weights:&lt;/p&gt;&lt;p&gt; :::1:1:1&lt;/p&gt;&lt;p&gt;Example with desktop name and activity id 3 columns the third one is twice as big as the first two:&lt;/p&gt;&lt;p&gt; HDMI-A-1:Desktop 1:99e10d31-e8f3-44aa-bbed-2a543f13fa54:1:1:2&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                  </widget>
+                 </item>
+                </layout>
                </item>
               </layout>
              </widget>
@@ -793,7 +821,7 @@
           <string>Position of the New Window</string>
          </property>
          <layout class="QVBoxLayout" name="verticalLayout_9">
-          <item alignment="Qt::AlignmentFlag::Qt::AlignmentFlag::AlignVCenter">
+          <item alignment="Qt::AlignmentFlag::AlignVCenter">
            <widget class="QComboBox" name="kcfg_newWindowPosition">
             <property name="minimumSize">
              <size>
@@ -953,14 +981,14 @@
           <item row="0" column="1">
            <widget class="QLineEdit" name="kcfg_ignoreActivity">
             <property name="toolTip">
-             <string>Comma-separated list of activity names. Windows in corresponding activities will not be tiled.</string>
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Comma-separated list of activity IDs. See Readme or Issue #125 to know IDs. Windows in corresponding activities will not be tiled.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
             </property>
            </widget>
           </item>
           <item row="0" column="0">
            <widget class="QLabel" name="ignoreActivityLabel">
             <property name="text">
-             <string>On Activity (name)</string>
+             <string>On Activity (activityId)</string>
             </property>
            </widget>
           </item>
@@ -989,6 +1017,23 @@
            <widget class="QLineEdit" name="kcfg_ignoreVDesktop">
             <property name="toolTip">
              <string>Comma-separated list of Virtual Desktops names. Windows corresponding to these will not be tiled.</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QCheckBox" name="kcfg_tileNothing">
+            <property name="text">
+             <string>Always, except by class</string>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="kcfg_tilingClass">
+            <property name="toolTip">
+             <string>Comma-separated list of window classes. Matching windows will become tiled automatically.</string>
             </property>
            </widget>
           </item>
@@ -1039,13 +1084,158 @@
       </attribute>
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
-        <widget class="QCheckBox" name="kcfg_maximizeSoleTile">
-         <property name="toolTip">
-          <string>&lt;p&gt;If there's only one window to be tiled, the window will be maximized with its borders removed to maximize usable screen space.&lt;/p&gt;&lt;p&gt;When using this option it's advisable to enable the &amp;quot;Allow resizing maximized windows from window edges&amp;quot; in &amp;quot;Breeze Window Decoration&amp;quot; settings, as this will often leave windows maximized, preventing borders from returning when windows are no longer sole otherwise.&lt;/p&gt;</string>
+        <widget class="QGroupBox" name="GB_windowLayer">
+         <property name="title">
+          <string>Window Layer</string>
          </property>
-         <property name="text">
-          <string>Maximize the sole window</string>
+         <layout class="QGridLayout" name="gridLayout_9">
+          <item row="0" column="0" alignment="Qt::AlignmentFlag::AlignLeft">
+           <widget class="QLabel" name="label_13">
+            <property name="text">
+             <string>Tiled</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="kcfg_tiledWindowsLayer">
+            <item>
+             <property name="text">
+              <string>Bottom</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Normal</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Above</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="0" column="2">
+           <spacer name="horizontalSpacer_2">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_14">
+            <property name="text">
+             <string>Float  </string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QComboBox" name="kcfg_floatedWindowsLayer">
+            <item>
+             <property name="text">
+              <string>Bottom</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Normal</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Above</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </item>
+       <item>
+        <widget class="QGroupBox" name="groupBox_12">
+         <property name="title">
+          <string>Window Size</string>
          </property>
+         <layout class="QGridLayout" name="gridLayout_10">
+          <item row="0" column="2">
+           <spacer name="horizontalSpacer_3">
+            <property name="orientation">
+             <enum>Qt::Orientation::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+          <item row="0" column="1" alignment="Qt::AlignmentFlag::AlignHCenter|Qt::AlignmentFlag::AlignVCenter">
+           <widget class="QSpinBox" name="kcfg_soleWindowWidth">
+            <property name="suffix">
+             <string>%</string>
+            </property>
+            <property name="minimum">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <number>100</number>
+            </property>
+            <property name="value">
+             <number>100</number>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="label_15">
+            <property name="text">
+             <string>The sole window width </string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="label_16">
+            <property name="text">
+             <string>The sole window height</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QSpinBox" name="kcfg_soleWindowHeight">
+            <property name="suffix">
+             <string>%</string>
+            </property>
+            <property name="minimum">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <number>100</number>
+            </property>
+            <property name="value">
+             <number>100</number>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QCheckBox" name="kcfg_soleWindowNoBorders">
+            <property name="text">
+             <string>No Borders</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+         <zorder>kcfg_soleWindowWidth</zorder>
+         <zorder>label_15</zorder>
+         <zorder>horizontalSpacer_3</zorder>
+         <zorder>label_16</zorder>
+         <zorder>kcfg_soleWindowHeight</zorder>
+         <zorder>kcfg_soleWindowNoBorders</zorder>
         </widget>
        </item>
        <item>
@@ -1055,13 +1245,6 @@
          </property>
          <property name="text">
           <string>Remove borders of tiled windows</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QCheckBox" name="kcfg_keepFloatAbove">
-         <property name="text">
-          <string>Keep floating windows above tiled windows</string>
          </property>
         </widget>
        </item>

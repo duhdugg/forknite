@@ -38,6 +38,11 @@ class EngineContext {
     this.drvctx.currentWindow = window;
   }
 
+  public get surfaceParams(): string {
+    let srf = this.drvctx.currentSurface;
+    return srf.output.name, srf.activity, srf.desktop.name;
+  }
+
   constructor(private drvctx: IDriverContext, private engine: TilingEngine) {}
 
   public setTimeout(func: () => void, timeout: number): void {
@@ -60,6 +65,9 @@ class EngineContext {
     let target = this.engine.windows.getWindowById(targetId);
     if (target === null) return;
     this.engine.windows.moveNew(window, target, after);
+  }
+  public getWindowById(id: string): WindowClass | null {
+    return this.engine.windows.getWindowById(id);
   }
 
   public showNotification(text: string) {

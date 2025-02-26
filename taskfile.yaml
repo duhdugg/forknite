@@ -1,0 +1,112 @@
+version: "3"
+
+vars:
+  PROJECT_NAME: "forknite"
+  PROJECT_VER:
+    sh: "git describe --tags --abbrev=0 || echo ''"
+  PROJECT_REV:
+    sh: "git rev-parse --short HEAD | cut -b-7"
+  KWINPKG_FILE_EXT: "kwinscript"
+
+  GIT_BRANCH:
+    sh: 'git symbolic-ref --short -q HEAD | read gb && ([ $gb = "master" ] || [ $gb = "main" ] || [ $gb = "" ]) &&  echo "" || echo "-${gb}"'
+  KWINPKG_FILE: "{{.PROJECT_NAME }}-{{.PROJECT_VER }}{{.GIT_BRANCH}}_{{.PROJECT_REV }}.{{.KWINPKG_FILE_EXT}}"
+  PACKAGE: "builds/{{.KWINPKG_FILE}}"
+  KWINPKG_DIR: "pkg"
+
+  KWIN_META: "{{.KWINPKG_DIR}}/metadata.json"
+  KWIN_QML: "{{.KWINPKG_DIR}}/contents/ui/main.qml"
+  NODE_SCRIPT: "{{.PROJECT_NAME}}.js"
+
+  SRC:
+    sh: 'find src -name "*.ts"'
+
+tasks:
+  clean:
+    cmds:
+      - rm -rvf {{.KWINPKG_DIR}}
+      - rm -vf {{.NODE_SCRIPT}} package-lock.json
+
+  install:
+    deps: [kwin-pkg-file]
+    cmds:
+      - "kpackagetool6 -t KWin/Script -s {{.PROJECT_NAME}} && kpackagetool6 -t KWin/Script -u {{.PACKAGE}} || kpackagetool6 -t KWin/Script -i {{.PACKAGE}}"
+
+  uninstall:
+    cmds:
+      - "kpackagetool6 -t KWin/Script -r  {{.PROJECT_NAME}}"
+
+  kwin-pkg-file:
+    aliases: [package]
+    deps:
+      - kwin-pkg
+    cmds:
+      - mkdir -p builds
+      - "rm -f {{.PACKAGE}}"
+      - "7z a -tzip {{.PACKAGE}} ./{{.KWINPKG_DIR}}/*"
+    sources:
+      - "{{.KWINPKG_DIR}}/**/*"
+    generates:
+      - "{{.PACKAGE}}"
+
+  kwin-pkg:
+    deps: [build-ts]
+    cmds:
+      - mkdir -p {{.KWINPKG_DIR}}/contents/ui
+      - mkdir -p {{.KWINPKG_DIR}}/contents/code
+      - mkdir -p {{.KWINPKG_DIR}}/contents/config
+      - task: meta-version
+      - cp res/main.qml {{.KWINPKG_DIR}}/contents/ui/main.qml
+      - cp res/config.ui {{.KWINPKG_DIR}}/contents/ui/config.ui
+      - cp res/popup.qml  {{.KWINPKG_DIR}}/contents/ui/popup.qml
+      - cp res/shortcuts.qml  {{.KWINPKG_DIR}}/contents/ui/shortcuts.qml
+      - cp {{.NODE_SCRIPT}} {{.KWINPKG_DIR}}/contents/code/script.js
+      - cp res/main.js   {{.KWINPKG_DIR}}/contents/code/main.js
+      - cp res/config.xml  {{.KWINPKG_DIR}}/contents/config/main.xml
+    sources:
+      - res/main.qml
+      - res/config.ui
+      - res/popup.qml
+      - res/shortcuts.qml
+      - "{{.NODE_SCRIPT}}"
+      - res/main.js
+      - res/config.xml
+    generates:
+      - "{{.KWINPKG_DIR}}/contents/ui/main.qml"
+      - "{{.KWINPKG_DIR}}/contents/ui/config.ui"
+      - "{{.KWINPKG_DIR}}/contents/ui/popup.qml"
+      - "{{.KWINPKG_DIR}}/contents/ui/shortcuts.qml"
+      - "{{.KWINPKG_DIR}}/contents/code/script.js"
+      - "{{.KWINPKG_DIR}}/contents/code/main.js"
+      - "{{.KWINPKG_DIR}}/contents/config/config.xml"
+
+  meta-version:
+    cmds:
+      - "touch {{.KWIN_META}}"
+      - 'sed "s/\$VER/{{.PROJECT_VER}}/" res/metadata.json | sed "s/\$REV/{{.PROJECT_REV}}/" > {{.KWIN_META}}'
+
+  build-ts:
+    deps:
+      - install-deps
+    cmds:
+      - npm run tsc --
+    sources:
+      - src/**/*.ts
+    preconditions:
+      - test -d src
+      - test -n "{{.SRC}}" || (echo "no files found in src folder" && exit 1)
+    generates:
+      - "{{.NODE_SCRIPT}}"
+
+  install-deps:
+    run: once
+    cmds:
+      - npm install --save-dev
+    preconditions:
+      - test -f package.json
+
+  package-json:
+    cmds:
+      - 'sed -i "s/\"version\": [^,]*/\"version\": \"{{.PROJECT_VER}}\"/" package.json'
+    preconditions:
+      - test -f package.json

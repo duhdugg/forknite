@@ -28,7 +28,9 @@ class ColumnLayout implements ILayout {
   public renderedWindowsIds: Array<string>;
   public renderedWindowsRects: Array<Rect>;
   public weight: number;
+  public timestamp: number;
   private parts: RotateLayoutPart<StackLayoutPart>;
+  private numberFloatedOrMinimized: number;
 
   public get description(): string {
     return "Column";
@@ -48,10 +50,21 @@ class ColumnLayout implements ILayout {
     this.windowIds = new Set();
     this.renderedWindowsIds = [];
     this.renderedWindowsRects = [];
+    this.numberFloatedOrMinimized = 0;
+    this.timestamp = 0;
   }
+
+  public get size(): number {
+    return this.windowIds.size - this.numberFloatedOrMinimized;
+  }
+
   public set isHorizontal(value: boolean) {
     if (value) this.parts.angle = 270;
     else this.parts.angle = 0;
+  }
+
+  public isEmpty(): boolean {
+    return this.windowIds.size === this.numberFloatedOrMinimized;
   }
 
   public apply(ctx: EngineContext, tileables: WindowClass[], area: Rect): void {
@@ -82,6 +95,21 @@ class ColumnLayout implements ILayout {
     return this.renderedWindowsIds[winId + 1];
   }
 
+  public getWindowIdOnRight(x: number): string | null {
+    for (let i = 0; i < this.renderedWindowsIds.length; i++) {
+      if (x < this.renderedWindowsRects[i].center[0] + 10)
+        return this.renderedWindowsIds[i];
+    }
+    return null;
+  }
+  public getWindowIdOnTop(y: number): string | null {
+    for (let i = 0; i < this.renderedWindowsIds.length; i++) {
+      if (y < this.renderedWindowsRects[i].center[1] + 10)
+        return this.renderedWindowsIds[i];
+    }
+    return null;
+  }
+
   public adjust(
     area: Rect,
     tiles: WindowClass[],
@@ -92,8 +120,21 @@ class ColumnLayout implements ILayout {
     this.parts.adjust(area, columnTiles, basis, delta);
   }
 
-  public actualizeWindowIds(ids: Set<string>) {
+  public actualizeWindowIds(ctx: EngineContext, ids: Set<string>) {
+    let window: WindowClass | null;
+    let floatedOrMinimized: number = 0;
     // Sets intersection
-    this.windowIds = new Set([...this.windowIds].filter((id) => ids.has(id)));
+    this.windowIds = new Set(
+      [...this.windowIds].filter((id) => {
+        window = ctx.getWindowById(id);
+        if (ids.has(id)) return true;
+        else if (window !== null && (window.minimized || window.floating)) {
+          floatedOrMinimized += 1;
+          return true;
+        }
+        return false;
+      })
+    );
+    this.numberFloatedOrMinimized = floatedOrMinimized;
   }
 }

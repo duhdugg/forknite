@@ -32,22 +32,22 @@
 
     <entry name="enableThreeColumnLayout" type="Bool">
 	    <label>Enable/disable Three Column layout</label>
-        <default>false</default>
+        <default>true</default>
     </entry>
 
     <entry name="enableSpiralLayout" type="Bool">
         <label>Enable/disable Spiral layout</label>
-        <default>false</default>
+        <default>true</default>
     </entry>
 
     <entry name="enableSpreadLayout" type="Bool">
 	    <label>Enable/disable Spread layout</label>
-        <default>false</default>
+        <default>true</default>
     </entry>
 
     <entry name="enableStairLayout" type="Bool">
 	    <label>Enable/disable Stair layout</label>
-        <default>false</default>
+        <default>true</default>
     </entry>
 
     <entry name="stairReverse" type="Bool">
@@ -64,9 +64,20 @@
 	    <label>Enable/disable Columns layout</label>
         <default>true</default>
     </entry>
+
     <entry name="columnsLayoutInitialRotationAngle" type="String">
 	    <label>Columns layout initial rotation angle</label>
         <default>0</default>
+    </entry>
+
+    <entry name="columnsBalanced" type="Bool">
+	    <label>Enable/disable creating a new window in the shortest column</label>
+        <default>false</default>
+    </entry>
+
+    <entry name="columnsLayerConf" type="String">
+	    <label>Columns layout default configuration.</label>
+        <default></default>
     </entry>
 
     <entry name="enableStackedLayout" type="Bool">
@@ -91,7 +102,7 @@
 
     <entry name="ignoreClass" type="String">
 	    <label>Ignore windows with certain classes(comma-separated list)</label>
-        <default>krunner,yakuake,spectacle,kded5,xwaylandvideobridge,plasmashell,ksplashqml,org.kde.plasmashell,org.kde.polkit-kde-authentication-agent-1,org.kde.kruler</default>
+        <default>krunner,yakuake,spectacle,kded5,xwaylandvideobridge,plasmashell,ksplashqml,org.kde.plasmashell,org.kde.polkit-kde-authentication-agent-1,org.kde.kruler,kruler,kwin_wayland,ksmserver-logout-greeter</default>
     </entry>
 
     <entry name="ignoreRole" type="String">
@@ -115,6 +126,16 @@
 
     <entry name="screenDefaultLayout" type="String">
 	    <label>Assigning number of layout to screen(output) by default</label>
+        <default></default>
+    </entry>
+
+    <entry name="tileNothing" type="Bool">
+	    <label>Don't tile any windows by default</label>
+        <default>false</default>
+    </entry>
+
+    <entry name="tilingClass" type="String">
+	    <label>Tile windows with certain classes(comma-separated list)</label>
         <default></default>
     </entry>
 
@@ -143,9 +164,29 @@
         <default>true</default>
     </entry>
 
-    <entry name="maximizeSoleTile" type="Bool">
-	    <label>If there is only one tile on the screen, remove screen gap and its borde, making it appear almost fullscreen.</label>
-        <default>true</default>
+    <entry name="tiledWindowsLayer" type="Int">
+	    <label>What layer will have tiled windows</label>
+        <default>0</default>
+    </entry>
+
+    <entry name="floatedWindowsLayer" type="Int">
+	    <label>What layer will have floated windows</label>
+        <default>1</default>
+    </entry>
+
+    <entry name="soleWindowWidth" type="Int">
+	    <label>The sole window width in percent.</label>
+        <default>100</default>
+    </entry>
+
+    <entry name="soleWindowHeight" type="Int">
+	    <label>The sole window height in percent.</label>
+        <default>100</default>
+    </entry>
+
+    <entry name="soleWindowNoBorders" type="Bool">
+      <label>Do not draw borders around sole window</label>
+        <default>false</default>
     </entry>
 
     <entry name="monocleMaximize" type="Bool">
@@ -155,7 +196,7 @@
 
     <entry name="monocleMinimizeRest" type="Bool">
 	    <label>Minimize other tiles than the current one in Monocle layout</label>
-        <default>true</default>
+        <default>false</default>
     </entry>
 
     <entry name="adjustLayout" type="Bool">
@@ -165,11 +206,6 @@
 
     <entry name="adjustLayoutLive" type="Bool">
 	    <label>Adjust as window is being resized</label>
-        <default>true</default>
-    </entry>
-
-    <entry name="keepFloatAbove" type="Bool">
-	    <label>Keep tiled windows below floating windows</label>
         <default>true</default>
     </entry>
 
@@ -195,27 +231,27 @@
 
     <entry name="screenGapLeft" type="Int">
         <label>Gap between tiles and screen borders (Left)</label>
-        <default>4</default>
+        <default>0</default>
     </entry>
 
     <entry name="screenGapRight" type="Int">
         <label>Gap between tiles and screen borders (Right)</label>
-        <default>4</default>
+        <default>0</default>
     </entry>
 
     <entry name="screenGapTop" type="Int">
         <label>Gap between tiles and screen borders (Top)</label>
-        <default>4</default>
+        <default>0</default>
     </entry>
 
     <entry name="screenGapBottom" type="Int">
         <label>Gap between tiles and screen borders (Bottom)</label>
-        <default>4</default>
+        <default>0</default>
     </entry>
 
     <entry name="tileLayoutGap" type="Int">
         <label>Gap between tiles in Tile layout</label>
-        <default>4</default>
+        <default>0</default>
     </entry>
 
     <entry name="pollMouseXdotool" type="Bool">

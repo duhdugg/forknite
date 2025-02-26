@@ -28,33 +28,51 @@ class LayoutStoreEntry {
   private layouts: { [key: string]: ILayout };
   private previousID: string;
 
-  constructor(output_name: string, desktop_name?: string) {
+  constructor(outputName: string, desktopName?: string, activity?: string) {
     let layouts = CONFIG.layoutOrder.map((layout) => layout.toLowerCase());
     let layouts_str = layouts.map((layout, i) => i + "." + layout + " ");
-    print(`Forknite: Screen(output):${output_name}, Desktop(name):${desktop_name}, layouts: ${layouts_str}`);
+    print(
+      `Krohnkite: Screen(output):${outputName}, Desktop(name):${desktopName}, Activity: ${activity}, layouts: ${layouts_str}`
+    );
     this.currentIndex = 0;
     this.currentID = CONFIG.layoutOrder[0];
 
     CONFIG.screenDefaultLayout.some((entry) => {
       let cfg = entry.split(":");
-      let cfg_output = cfg[0];
-      let cfg_desktop = cfg.length == 2 ? undefined : cfg[1];
-      let cfg_screen_id_str = cfg.length == 2 ? cfg[1] : cfg[2];
-      let cfg_screen_id = parseInt(cfg_screen_id_str);
-      if (isNaN(cfg_screen_id)) {
-        cfg_screen_id = layouts.indexOf(cfg_screen_id_str.toLowerCase());
-        cfg_screen_id =
-          cfg_screen_id >= 0
-            ? cfg_screen_id
-            : layouts.indexOf(cfg_screen_id_str.toLowerCase() + "layout");
+      const cfgLength = cfg.length;
+      if (cfgLength < 2 && cfgLength > 4) return false;
+      let cfgOutput = cfg[0];
+      let cfgActivity = "";
+      let cfgVDesktop = "";
+      let cfgLayout = undefined;
+      if (cfgLength === 2) {
+        cfgLayout = cfg[1];
+      } else if (cfgLength === 3) {
+        cfgVDesktop = cfg[1];
+        cfgLayout = cfg[2];
+      } else if (cfgLength === 4) {
+        cfgActivity = cfg[1];
+        cfgVDesktop = cfg[2];
+        cfgLayout = cfg[3];
+      }
+      if (cfgLayout === undefined) return false;
+      // let cfg_desktop = cfg.length > 2 ? undefined : cfg[1];
+      let cfgLayoutId = parseInt(cfgLayout);
+      if (isNaN(cfgLayoutId)) {
+        cfgLayoutId = layouts.indexOf(cfgLayout.toLowerCase());
+        cfgLayoutId =
+          cfgLayoutId >= 0
+            ? cfgLayoutId
+            : layouts.indexOf(cfgLayout.toLowerCase() + "layout");
       }
       if (
-        (output_name === cfg_output || cfg_output === "") &&
-        (desktop_name === cfg_desktop || cfg_desktop === undefined) &&
-        cfg_screen_id >= 0 &&
-        cfg_screen_id < CONFIG.layoutOrder.length
+        (outputName === cfgOutput || cfgOutput === "") &&
+        (desktopName === cfgVDesktop || cfgVDesktop === "") &&
+        (activity === cfgActivity || cfgActivity === "") &&
+        cfgLayoutId >= 0 &&
+        cfgLayoutId < CONFIG.layoutOrder.length
       ) {
-        this.currentIndex = cfg_screen_id;
+        this.currentIndex = cfgLayoutId;
         this.currentID = CONFIG.layoutOrder[this.currentIndex];
         return true;
       }
@@ -77,7 +95,7 @@ class LayoutStoreEntry {
   }
 
   public setLayout(targetID: string): ILayout {
-    const targetLayout = this.loadLayout(targetID);
+    let targetLayout = this.loadLayout(targetID);
     if (
       targetLayout instanceof MonocleLayout &&
       this.currentLayout instanceof MonocleLayout
@@ -85,6 +103,7 @@ class LayoutStoreEntry {
       /* toggle Monocle "OFF" */
       this.currentID = this.previousID;
       this.previousID = targetID;
+      targetLayout = this.loadLayout(this.currentID);
     } else if (this.currentID !== targetID) {
       this.previousID = this.currentID;
       this.currentID = targetID;
@@ -116,36 +135,39 @@ class LayoutStore {
   public getCurrentLayout(srf: ISurface): ILayout {
     return srf.ignore
       ? FloatingLayout.instance
-      : this.getEntry(srf.id).currentLayout;
+      : this.getEntry(srf).currentLayout;
   }
 
   public cycleLayout(srf: ISurface, step: 1 | -1): ILayout | null {
     if (srf.ignore) return null;
-    return this.getEntry(srf.id).cycleLayout(step);
+    return this.getEntry(srf).cycleLayout(step);
   }
 
   public setLayout(srf: ISurface, layoutClassID: string): ILayout | null {
     if (srf.ignore) return null;
-    return this.getEntry(srf.id).setLayout(layoutClassID);
+    return this.getEntry(srf).setLayout(layoutClassID);
   }
 
-  private getEntry(key: string): LayoutStoreEntry {
-    if (!this.store[key]) {
-      // key with activity format example: HDMI-A-1@f381c9cf-cb90-4ade-8b3f-24ae0002d366#Desktop 1
+  private getEntry(srf: ISurface): LayoutStoreEntry {
+    if (!this.store[srf.id]) {
       // check if this surface but without activity already constructed.
       // surface create after desktop and constructor ran twice
-      let i1 = key.indexOf("@");
-      let i2 = key.indexOf("#");
-      let key_without_activity = key.slice(0, i1 + 1) + key.slice(i2);
-      if (i1 > 0 && i2 > 0 && i2 - i1 > 1 && this.store[key_without_activity]) {
-        this.store[key] = this.store[key_without_activity];
+      let key_without_activity = KWinSurface.generateId(
+        srf.output.name,
+        "",
+        srf.desktop.id
+      );
+      if (this.store[key_without_activity]) {
+        this.store[srf.id] = this.store[key_without_activity];
         delete this.store[key_without_activity];
       } else {
-        let output_name = key.slice(0, key.indexOf("@"));
-        let desktop_name = i2 !== -1 ? key.slice(i2 + 1) : undefined;
-        this.store[key] = new LayoutStoreEntry(output_name, desktop_name);
+        this.store[srf.id] = new LayoutStoreEntry(
+          srf.output.name,
+          srf.desktop.name,
+          srf.activity
+        );
       }
     }
-    return this.store[key];
+    return this.store[srf.id];
   }
 }

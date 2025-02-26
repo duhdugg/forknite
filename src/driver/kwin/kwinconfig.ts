@@ -22,9 +22,15 @@ class KWinConfig implements IConfig {
   //#region Layout
   public layoutOrder: string[];
   public layoutFactories: { [key: string]: () => ILayout };
-  public maximizeSoleTile: boolean;
+  public soleWindowWidth: number;
+  public soleWindowHeight: number;
+  public soleWindowNoBorders: boolean;
   public tileLayoutInitialAngle: string;
   public columnsLayoutInitialAngle: string;
+  public columnsBalanced: boolean;
+  public columnsLayerConf: string[];
+  public tiledWindowsLayer: number;
+  public floatedWindowsLayer: number;
   public monocleMaximize: boolean;
   public monocleMinimizeRest: boolean;
   public stairReverse: boolean; // kwin.specific
@@ -33,7 +39,6 @@ class KWinConfig implements IConfig {
   //#region Features
   public adjustLayout: boolean;
   public adjustLayoutLive: boolean;
-  public keepFloatAbove: boolean;
   public keepTilingOnDrag: boolean;
   public noTileBorder: boolean;
   public limitTileWidthRatio: number;
@@ -74,6 +79,9 @@ class KWinConfig implements IConfig {
   public ignoreVDesktop: string[];
 
   public screenDefaultLayout: string[];
+
+  public tileNothing: boolean;
+  public tilingClass: string[];
   //#endregion
 
   constructor() {
@@ -110,7 +118,9 @@ class KWinConfig implements IConfig {
       this.layoutFactories[layoutClass.id] = () => new layoutClass();
     });
 
-    this.maximizeSoleTile = KWIN.readConfig("maximizeSoleTile", false);
+    this.soleWindowWidth = KWIN.readConfig("soleWindowWidth", 100);
+    this.soleWindowHeight = KWIN.readConfig("soleWindowHeight", 100);
+    this.soleWindowNoBorders = KWIN.readConfig("soleWindowNoBorders", false);
     this.tileLayoutInitialAngle = KWIN.readConfig(
       "tileLayoutInitialRotationAngle",
       "0"
@@ -119,13 +129,22 @@ class KWinConfig implements IConfig {
       "columnsLayoutInitialRotationAngle",
       "0"
     );
+    this.columnsBalanced = KWIN.readConfig("columnsBalanced", false);
+    this.columnsLayerConf = commaSeparate(
+      KWIN.readConfig("columnsLayerConf", "")
+    );
+    this.tiledWindowsLayer = getWindowLayer(
+      KWIN.readConfig("tiledWindowsLayer", 0)
+    );
+    this.floatedWindowsLayer = getWindowLayer(
+      KWIN.readConfig("floatedWindowsLayer", 1)
+    );
     this.monocleMaximize = KWIN.readConfig("monocleMaximize", true);
     this.monocleMinimizeRest = KWIN.readConfig("monocleMinimizeRest", false);
     this.stairReverse = KWIN.readConfig("stairReverse", false);
 
     this.adjustLayout = KWIN.readConfig("adjustLayout", true);
     this.adjustLayoutLive = KWIN.readConfig("adjustLayoutLive", true);
-    this.keepFloatAbove = KWIN.readConfig("keepFloatAbove", true);
     this.keepTilingOnDrag = KWIN.readConfig("keepTilingOnDrag", true);
     this.noTileBorder = KWIN.readConfig("noTileBorder", false);
 
@@ -157,7 +176,7 @@ class KWinConfig implements IConfig {
     this.ignoreClass = commaSeparate(
       KWIN.readConfig(
         "ignoreClass",
-        "krunner,yakuake,spectacle,kded5,xwaylandvideobridge,plasmashell,ksplashqml"
+        "krunner,yakuake,spectacle,kded5,xwaylandvideobridge,plasmashell,ksplashqml,org.kde.plasmashell,org.kde.polkit-kde-authentication-agent-1,org.kde.kruler,kruler,kwin_wayland,ksmserver-logout-greeter"
       )
     );
     this.ignoreRole = commaSeparate(KWIN.readConfig("ignoreRole", "quake"));
@@ -169,6 +188,9 @@ class KWinConfig implements IConfig {
     this.screenDefaultLayout = commaSeparate(
       KWIN.readConfig("screenDefaultLayout", "")
     );
+
+    this.tilingClass = commaSeparate(KWIN.readConfig("tilingClass", ""));
+    this.tileNothing = KWIN.readConfig("tileNothing", false);
 
     if (this.preventMinimize && this.monocleMinimizeRest) {
       debug(

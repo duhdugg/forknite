@@ -18,6 +18,10 @@
 // FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 // DEALINGS IN THE SOFTWARE.
 
+function warning(s: string) {
+  print(`Forknite warn: ${s}`);
+}
+
 function clip(value: number, min: number, max: number): number {
   if (value < min) return min;
   if (value > max) return max;
@@ -102,4 +106,20 @@ function overlap(
   const max = Math.max;
   const dx = max(0, min(max1, max2) - max(min1, min2));
   return dx > 0;
+}
+
+/**
+ * Parse surfaceId like: HDMI-A-1@f381c9cf-cb90-4ade-8b3f-24ae0002d366#Desktop 1
+ * @param id string
+ * @return A tuple containing (outputName,activityId,vDesktopName)
+ */
+function surfaceIdParse(id: string): [string, string, string] {
+  let i1 = id.indexOf("@");
+  let i2 = id.indexOf("#");
+
+  let outputName = i1 !== -1 ? id.slice(0, i1) : id;
+  let activity = i1 !== -1 && i2 !== -1 ? id.slice(i1 + 1, i2) : "";
+  let desktopName = i2 !== -1 ? id.slice(i2 + 1) : "";
+
+  return [outputName, activity, desktopName];
 }
