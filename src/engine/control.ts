@@ -26,12 +26,14 @@
  */
 
 class TilingController {
+  public lastFocused: WindowClass | null;
   public engine: TilingEngine;
   private isDragging: boolean;
   private dragCompleteTime: number | null;
 
   public constructor(engine: TilingEngine) {
     this.engine = engine;
+    this.lastFocused = null;
     this.isDragging = false;
     this.dragCompleteTime = null;
   }
@@ -224,6 +226,7 @@ class TilingController {
 
   public onWindowFocused(ctx: IDriverContext, window: WindowClass) {
     window.timestamp = new Date().getTime();
+    this.lastFocused = window;
   }
   public onDesktopsChanged(ctx: IDriverContext, window: WindowClass) {
     window.state = WindowState.Undecided;

@@ -50,7 +50,7 @@ class TilingEngine {
         CONFIG.screenGapLeft,
         CONFIG.screenGapRight,
         CONFIG.screenGapTop,
-        CONFIG.screenGapBottom
+        CONFIG.screenGapBottom,
       );
       const tiles = this.windows.getVisibleTiles(srf);
       layout.adjust(area, tiles, basis, delta);
@@ -65,7 +65,7 @@ class TilingEngine {
   public resizeFloat(
     window: WindowClass,
     dir: "east" | "west" | "south" | "north",
-    step: -1 | 1
+    step: -1 | 1,
   ) {
     const srf = window.surface;
 
@@ -104,7 +104,7 @@ class TilingEngine {
   public resizeTile(
     basis: WindowClass,
     dir: "east" | "west" | "south" | "north",
-    step: -1 | 1
+    step: -1 | 1,
   ) {
     const srf = basis.surface;
 
@@ -154,7 +154,7 @@ class TilingEngine {
         CONFIG.screenGapLeft,
         CONFIG.screenGapRight,
         CONFIG.screenGapTop,
-        CONFIG.screenGapBottom
+        CONFIG.screenGapBottom,
       );
       layout.adjust(area, this.windows.getVisibleTileables(srf), basis, delta);
     }
@@ -171,7 +171,7 @@ class TilingEngine {
   public resizeWindow(
     window: WindowClass,
     dir: "east" | "west" | "south" | "north",
-    step: -1 | 1
+    step: -1 | 1,
   ) {
     const state = window.state;
     if (WindowClass.isFloatingState(state)) this.resizeFloat(window, dir, step);
@@ -239,7 +239,7 @@ class TilingEngine {
         CONFIG.screenGapLeft,
         CONFIG.screenGapRight,
         CONFIG.screenGapTop,
-        CONFIG.screenGapBottom
+        CONFIG.screenGapBottom,
       );
 
     if (tileables.length > 0)
@@ -247,7 +247,7 @@ class TilingEngine {
 
     if (CONFIG.limitTileWidthRatio > 0 && !(layout instanceof MonocleLayout)) {
       const maxWidth = Math.floor(
-        workingArea.height * CONFIG.limitTileWidthRatio
+        workingArea.height * CONFIG.limitTileWidthRatio,
       );
       tileables
         .filter((tile) => tile.tiled && tile.geometry.width > maxWidth)
@@ -257,7 +257,7 @@ class TilingEngine {
             g.x + Math.floor((g.width - maxWidth) / 2),
             g.y,
             maxWidth,
-            g.height
+            g.height,
           );
         });
     }
@@ -291,10 +291,14 @@ class TilingEngine {
     if (!window.shouldIgnore) {
       /* engine#arrange will update the state when required. */
       window.state = WindowState.Undecided;
-      if (CONFIG.newWindowPosition === 1) this.windows.unshift(window);
-      else if (CONFIG.newWindowPosition === 2) {
-        this.windows.beside_first(window);
-      } else this.windows.push(window);
+      const func_map = {
+        1: (win: WindowClass) => this.windows.unshift(win),
+        2: (win: WindowClass) => this.windows.beside_first(win),
+        3: (win: WindowClass) => this.windows.push(win),
+        default: (win: WindowClass) => this.windows.relative_state(win),
+      };
+      const func = {}[CONFIG.newWindowPosition] || func_map.default;
+      func(window);
     }
   }
 
@@ -496,7 +500,7 @@ class TilingEngine {
   public handleLayoutShortcut(
     ctx: IDriverContext,
     input: Shortcut,
-    data?: any
+    data?: any,
   ): boolean {
     const layout = this.layouts.getCurrentLayout(ctx.currentSurface);
     if (layout.handleShortcut)
@@ -507,7 +511,7 @@ class TilingEngine {
   private getNeighborByDirection(
     ctx: IDriverContext,
     basis: WindowClass,
-    dir: Direction
+    dir: Direction,
   ): WindowClass | null {
     let vertical: boolean;
     let sign: -1 | 1;
@@ -537,7 +541,7 @@ class TilingEngine {
       .filter(
         vertical
           ? (tile) => tile.geometry.y * sign > basis.geometry.y * sign
-          : (tile) => tile.geometry.x * sign > basis.geometry.x * sign
+          : (tile) => tile.geometry.x * sign > basis.geometry.x * sign,
       )
       .filter(
         vertical
@@ -546,15 +550,15 @@ class TilingEngine {
                 basis.geometry.x,
                 basis.geometry.maxX,
                 tile.geometry.x,
-                tile.geometry.maxX
+                tile.geometry.maxX,
               )
           : (tile) =>
               overlap(
                 basis.geometry.y,
                 basis.geometry.maxY,
                 tile.geometry.y,
-                tile.geometry.maxY
-              )
+                tile.geometry.maxY,
+              ),
       );
     if (candidates.length === 0) return null;
 
@@ -565,13 +569,13 @@ class TilingEngine {
           ? (prevMin, tile): number => Math.min(tile.geometry.y * sign, prevMin)
           : (prevMin, tile): number =>
               Math.min(tile.geometry.x * sign, prevMin),
-        Infinity
+        Infinity,
       );
 
     const closest = candidates.filter(
       vertical
         ? (tile) => tile.geometry.y === min
-        : (tile) => tile.geometry.x === min
+        : (tile) => tile.geometry.x === min,
     );
 
     return closest.sort((a, b) => b.timestamp - a.timestamp)[0];

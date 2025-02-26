@@ -97,7 +97,7 @@ class KWinDriver implements IDriverContext {
   public workspace: Workspace;
   private shortcuts: IShortcuts;
   private engine: TilingEngine;
-  private control: TilingController;
+  public control: TilingController;
   private windowMap: WrapperMap<Window, WindowClass>;
   private entered: boolean;
   private mousePoller: KWinMousePoller;
@@ -111,7 +111,7 @@ class KWinDriver implements IDriverContext {
     this.windowMap = new WrapperMap(
       (client: Window) => KWinWindow.generateID(client),
       (client: Window) =>
-        new WindowClass(new KWinWindow(client, this.workspace))
+        new WindowClass(this, new KWinWindow(client, this.workspace))
     );
     this.entered = false;
     this.mousePoller = new KWinMousePoller();

@@ -54,6 +54,7 @@ class WindowClass {
   }
 
   public readonly id: string;
+  public readonly driver: KWinDriver;
   public readonly window: IDriverWindow;
 
   public get actualGeometry(): Readonly<Rect> {
@@ -159,8 +160,9 @@ class WindowClass {
   private shouldCommitFloat: boolean;
   private weightMap: { [key: string]: number };
 
-  constructor(window: IDriverWindow) {
+  constructor(driver: KWinDriver, window: IDriverWindow) {
     this.id = window.id;
+    this.driver = driver;
     this.window = window;
 
     this.floatGeometry = window.geometry;
